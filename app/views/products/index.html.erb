@@ -2,17 +2,19 @@
 
 <h1>Products Lists</h1>
 
-<%if flash[:notice]%>
-    <%flash.each do |name,message|%>
-        <p class="text-danger"><%= message%></p>
-    <%end%>
-<%end%>
+<!-- To display Error/Success Message -->
+<%if flash[:notice] %>
+    <%flash.each do |name,message| %>
+        <p class="text-danger"><%= message %></p>
+    <% end %>
+<% end %>
 
-    <ol class="fs-2">
-        <% @products.each do |product|%>
-        <li><%= link_to product.name, product_path(product)%></li>
-        <%end%>
-    </ol>
-    <%= button_to "Add New Product", new_product_path, method: :get ,class:"btn-success border-0 rounded-pill shadow p-3"%>
+<!-- To display Product list -->
+<ol class="fs-2">
+    <% @products.each do |product| %>
+    <li><%= link_to product.name, product_path(product) %></li>
+    <% end %>
+</ol>
+<%= button_to "Add New Product", new_product_path, method: :get ,class:"btn-success border-0 rounded-pill shadow p-3" %>
 
 </div>
