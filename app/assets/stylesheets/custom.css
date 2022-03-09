@@ -5,6 +5,11 @@
     justify-content: center;
     align-items: center;      
 }
+
+.center h1{
+    text-decoration: underline;
+}
+
 ol li *{
     text-decoration: none !important;
     color: #000;

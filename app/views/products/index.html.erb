@@ -1,20 +1,22 @@
+<!-- Main Root/Index Page -->
 <div class="center flex-column">
 
-<h1>Products Lists</h1>
+    <h1> Products Lists </h1>
 
-<!-- To display Error/Success Message -->
-<%if flash[:notice] %>
-    <%flash.each do |name,message| %>
-        <p class="text-danger"><%= message %></p>
+    <!-- To display Error/Success Message -->
+    <%if flash[:notice] %>
+       <% flash.each do |name,message| %>
+           <p class="text-danger"><%= message %></p>
+       <% end %>
     <% end %>
-<% end %>
 
-<!-- To display Product list -->
-<ol class="fs-2">
-    <% @products.each do |product| %>
-    <li><%= link_to product.name, product_path(product) %></li>
-    <% end %>
-</ol>
-<%= button_to "Add New Product", new_product_path, method: :get ,class:"btn-success border-0 rounded-pill shadow p-3" %>
+    <!-- To display Product list -->
+    <ol class="fs-2">
+        <% @products.each do |product| %>
+        <li><%= link_to product.name, product_path(product) %></li>
+        <% end %>
+    </ol>
+
+    <%= button_to "Add New Product", new_product_path, method: :get ,class:"btn-success border-0 rounded-pill shadow p-3" %>
 
 </div>
