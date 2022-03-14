@@ -1,0 +1,24 @@
+<!-- File For Edit Books -->
+<div class="center flex-column">
+
+  <h1> Edit Book's Detail </h1>
+
+  <!-- Edit Form Start Here -->
+  <%= form_for @book,url: {action: :update} do |f| %>
+
+    <%= f.label :name, class:"mt-3"  %>
+    <%= f.text_field :name ,placeholder: "Enter Book's Name", class:"mb-2 form-control" %>
+    <br>
+
+    <%= f.label :price%>
+    <%= f.number_field :price, step: :any ,placeholder: "Enter Book's Price", class:"mb-2 form-control" %>
+    <br>
+
+    <%= f.label :author%> &nbsp;
+    <%= f.select :author_id, Author.all.map { |t| [t.firstname+ " " +t.lastname, t.id]}%>
+    <br> <br>
+
+    <%= f.submit class:"btn-warning border-0 rounded-pill shadow p-3" %>
+
+  <% end %>
+</div>
