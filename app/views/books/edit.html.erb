@@ -10,12 +10,12 @@
     <%= f.text_field :name ,placeholder: "Enter Book's Name", class:"mb-2 form-control" %>
     <br>
 
-    <%= f.label :price%>
+    <%= f.label :price %>
     <%= f.number_field :price, step: :any ,placeholder: "Enter Book's Price", class:"mb-2 form-control" %>
     <br>
 
-    <%= f.label :author%> &nbsp;
-    <%= f.select :author_id, Author.all.map { |t| [t.firstname+ " " +t.lastname, t.id]}%>
+    <%= f.label :author %> &nbsp;
+    <%= f.select :author_id, Author.all.map { |t| [t.firstname+ " " +t.lastname, t.id]} %>
     <br> <br>
 
     <%= f.submit class:"btn-warning border-0 rounded-pill shadow p-3" %>

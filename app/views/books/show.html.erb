@@ -1,18 +1,22 @@
-<h1>Books#show</h1>
-<p>Find me in app/views/books/show.html.erb</p>
+<!-- Book Showing Code -->
 <div class="center flex-column">
   <h1>Book Details</h1>
+
   <div>
-    <h2> &#10145; Name: <%=@book.name%> </h2>
-    <h2> &#10145; Price: <%=@book.price%> </h2>
-    <h2> &#10145; Author: <%=@book.author.firstname%> </h2>
-    <h2> &#10145; Author ID: <%=@book.author.id%> </h2>
+    <h2> &#10145; Name: <%= @book.name %> </h2>
+    <h2> &#10145; Price: <%= @book.price %> </h2>
+    <h2> &#10145; Author: <%= @book.author.firstname %> </h2>
+    <h2> &#10145; Author ID: <%= @book.author.id %> </h2>
   </div>
+
   <div class="d-flex align-items-center justify-content-around">
-    <%= button_to "Edit book" , edit_book_path, method: :get ,class:"btn-success border-0 rounded-pill shadow p-2 my-2"%>
+    <%= button_to "Edit book" , edit_book_path, method: :get ,class:"btn-success border-0 rounded-pill shadow p-2 my-2" %>
     &nbsp;
-    <%= button_to "Delete book", book_path, method: :delete ,class:"btn-danger border-0 rounded-pill shadow p-2 mb-2"%>
+
+    <%= button_to "Delete book", book_path, method: :delete ,class:"btn-danger border-0 rounded-pill shadow p-2 mb-2" %>
     &nbsp;
-    <%= button_to "View all books", books_path,method: :get ,class:"btn-success border-0 rounded-pill shadow p-2 mb-2"%>
+
+    <%= button_to "View all books", books_path,method: :get ,class:"btn-success border-0 rounded-pill shadow p-2 mb-2" %>
+
   </div>
 </div>
