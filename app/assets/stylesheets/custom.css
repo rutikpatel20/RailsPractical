@@ -1,16 +1,32 @@
-.center {
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;      
+body {
+  overflow: hidden;
+  /* Gradient background - 1 */
+  /* background-color: #bdd4e7;
+background-image: linear-gradient(315deg, #bdd4e7 0%, #8693ab 74%); */
+
+  /* Gradient background - 2 */
+  background-color: #f9d29d;
+  background-image: linear-gradient(315deg, #f9d29d 0%, #ffd8cb 74%);
 }
 
-.center h1{
+h1{
     text-decoration: underline;
 }
 
-ol li *{
-    text-decoration: none !important;
-    color: #000;
+.center {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+ol li *,
+tr td * {
+  text-decoration: none !important;
+  color: #000;
+}
+
+#author_dob_1i, #author_dob_2i, #author_dob_3i, #book_author_id{
+  padding: 3px;
 }

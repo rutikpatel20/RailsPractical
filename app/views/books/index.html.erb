@@ -1,0 +1,32 @@
+<!-- Books List Show Here -->
+<div class="center flex-column">
+
+  <h1>Book Lists</h1>
+
+  <% if flash[:notice] %>
+    <% flash.each do |name,message| %>
+      <p class="text-danger"><%= message %></p>
+    <% end %>
+  <% end %>
+ 
+<div>
+  <table class="table table-info table-striped">
+    <ol class="fs-2">
+    <thead class="table-secondary">
+        <td> Name </td>
+        <td> Price </td>
+    </thead>
+      <% @books.each do |book| %>
+        <tr>
+          <td> <%= link_to book.name, book_path(book) %> </td>
+          <td> <%= book.price %> </td>
+        </tr>
+      <% end %>
+    </ol>
+  </table>
+</div>
+
+
+  <%= button_to "Add New Book", new_book_path, method: :get ,class:"btn-success border-0 rounded-pill shadow p-2" %>
+  <%= button_to "View all Author", authors_path,method: :get ,class:"btn-success border-0 rounded-pill shadow p-2 my-2" %>
+</div>
