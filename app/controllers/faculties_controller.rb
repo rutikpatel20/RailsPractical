@@ -10,7 +10,7 @@ class FacultiesController < ApplicationController
   def create
     @faculty = Faculty.create(params.require(:faculty).permit(:firstname, :lastname, :phone_number, :email, :birthdate, :department, :designation))
     if @faculty.valid?
-      flash[:notice] = "Faculty Added Successfully"
+      flash[:errors] = "Faculty Added Successfully"
       redirect_to faculties_path
     else
       flash[:errors] = @faculty.errors.full_messages
@@ -29,7 +29,7 @@ class FacultiesController < ApplicationController
   def update
     @faculty = Faculty.find(params[:id])
     if @faculty.update(params.require(:faculty).permit(:firstname, :lastname, :phone_number, :email, :birthdate, :department, :designation))
-      flash[:notice] = "Faculty Updated Successfully"
+      flash[:errors] = "Faculty Updated Successfully"
       redirect_to faculty_path(@faculty)
     else
       flash[:errors] = @faculty.errors.full_messages
@@ -40,10 +40,10 @@ class FacultiesController < ApplicationController
   def destroy
     @faculty = Faculty.find(params[:id])
     if @faculty.delete
-      flash[:notice] = "Faculty Successfully Deleted"
+      flash[:errors] = "Faculty Successfully Deleted"
       redirect_to root_path(@faculty)
     else
-      flash[:notice] = @faculty.errors.full_messages
+      flash[:errors] = @faculty.errors.full_messages
       redirect_to destroy_faculty_path
     end
   end
