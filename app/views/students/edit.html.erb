@@ -2,9 +2,9 @@
 <div class="center flex-column">
 
 <!-- Error Message -->
-  <% if flash[:notice] %>
-    <% flash.each do |name,message| %>
-      <p class="text-danger"><%= message%></p>
+  <% if flash[:errors] %>
+    <% flash[:errors].each do |error| %>
+      <p class="text-danger"><%= error %></p>
     <% end %>
   <% end %>
 

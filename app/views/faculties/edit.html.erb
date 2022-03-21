@@ -2,6 +2,13 @@
 <div class="center flex-column">
   <h1> Edit Faculty's Detail </h1>
 
+  <!-- Error Message -->
+  <% if flash[:errors] %>
+    <% flash[:errors].each do |error| %>
+      <p class="text-danger"><%= error %></p>
+    <% end %>
+  <% end %>
+
   <!-- Edit Form Start Here -->
   <%= form_for @faculty, url: {action: :update} do |f| %>
     <%= f.label :firstname, "First Name :", class:"mt-3" %>
