@@ -1,0 +1,23 @@
+<!-- Student Details Showing -->
+<div class="center flex-column">
+  <h1>Student Details</h1>
+  <div>
+    <h2> &#10145; Firstname: <%= @student.firstname %> </h2>
+    <h2> &#10145; Lastname: <%= @student.lastname %> </h2>
+    <h2> &#10145; Phone Number: <%= @student.phone_number %> </h2>
+    <h2> &#10145; Email: <%= @student.email %> </h2>
+    <h2> &#10145; Birthdate: <%= @student.birthdate %></h2>
+    <h2> &#10145; Department: <%= @student.department %> </h2>
+  </div>
+
+  <div class="d-flex">
+
+    <%= button_to "Edit student" , edit_student_path, method: :get ,class:"btn-success border-0 rounded-pill shadow p-2 m-2" %>
+    &nbsp;
+
+    <%= button_to "Delete student", student_path, method: :delete ,class:"btn-danger border-0 rounded-pill shadow p-2 m-2" %>
+    &nbsp;
+
+    <%= button_to "View all Students", students_path,method: :get ,class:"btn-primary border-0 rounded-pill shadow p-2 m-2" %>
+  </div>
+</div>

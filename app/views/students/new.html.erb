@@ -1,0 +1,45 @@
+<!-- Add New Student -->
+<div class="center flex-column">
+  <h1>Add New Student</h1>
+
+  <!-- Error Message -->
+  <% if flash[:errors] %>
+    <% flash[:errors].each do |error| %>
+      <p class="text-danger"><%= error %></p>
+    <% end %>
+  <% end %>
+
+  <%# Form Started Here %>
+  <%= form_for @student do |f| %>
+    <%= f.label :firstname, "First Name :", class:"mt-3" %>
+    <%= f.text_field :firstname, placeholder: "Enter Student's First Name", class:"mb-2 form-control" %>
+    <br>
+
+    <%= f.label :lastname, "Last Name :" %>
+    <%= f.text_field :lastname, placeholder: "Enter Student's Last Name", class:"mb-2 form-control" %>
+    <br>
+
+    <%= f.label :phone_number, "Phone Number :" %>
+    <%= f.text_field :phone_number, placeholder: "Enter Student's Phone Number", class:"mb-2 form-control" %>
+    <br>
+
+    <%= f.label :email, "E-mail ID :" %>
+    <%= f.text_field :email, placeholder: "Enter Student's E-mail ID", class:"mb-2 form-control" %>
+    <br>
+
+    <%= f.label :birthdate, "Birthdate :" %> &nbsp;
+    <%= f.date_select :birthdate, as: :date, :start_year=>1900 , placeholder: "Enter Student's Birthday Date", class:"mb-2 rounded-3 dob_field" %>
+    <br> <br>
+
+    <%= f.label :department, "Department :" %>
+    <%= f.text_field :department, placeholder: "Enter Student's Department", class:"mb-2 form-control" %>
+    <br>
+
+    <%= f.check_box :terms_of_usage, class:"mb-3 form-check-input" %>
+    <%= f.label :terms_of_usage, "I Agree Terms of Usage" %>
+    <br>
+
+    <%= f.submit class:"btn-primary border-0 rounded-pill shadow p-3" %>
+
+  <% end %>
+</div>

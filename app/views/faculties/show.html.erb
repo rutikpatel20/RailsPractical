@@ -1,0 +1,22 @@
+<!-- Faculty Details Showing -->
+<div class="center flex-column">
+  <h1>Faculty Details</h1>
+
+  <div>
+    <h2> &#10145; Firstname: <%= @faculty.firstname %> </h2>
+    <h2> &#10145; Lastname: <%= @faculty.lastname %> </h2>
+    <h2> &#10145; Phone Number: <%= @faculty.phone_number %> </h2>
+    <h2> &#10145; Email: <%= @faculty.email %> </h2>
+    <h2> &#10145; Birthdate: <%= @faculty.birthdate %></h2>
+    <h2> &#10145; Department: <%= @faculty.department %> </h2>
+    <h2> &#10145; Designation: <%= @faculty.designation %> </h2>
+  </div>
+
+  <div class="d-flex">
+    <%= button_to "Edit Faculty" , edit_faculty_path, method: :get ,class:"btn-success border-0 rounded-pill shadow p-2 m-2" %>
+    
+    <%= button_to "Delete Faculty", faculty_path, method: :delete ,class:"btn-danger border-0 rounded-pill shadow p-2 m-2" %>
+    
+    <%= button_to "View all Faculties", faculties_path,method: :get ,class:"btn-primary border-0 rounded-pill shadow p-2 m-2" %>
+  </div>
+</div>
