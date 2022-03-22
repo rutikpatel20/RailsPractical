@@ -43,6 +43,10 @@ class Faculty < ApplicationRecord
     puts "------This Callback is running after creating the Faculty------"
   end
 
+  after_save do |faculty|
+    puts "------This Callback is running after saving the Faculty------"
+  end
+
   after_touch do |faculty|
     puts "------This Callback is running after Touching the Faculty------"
   end

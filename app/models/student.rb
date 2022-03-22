@@ -35,6 +35,10 @@ class Student < ApplicationRecord
   after_create do |student|
     puts "------You have Successfully created Student!------"
   end
+
+  after_save do |student|
+    puts "------This Callback is running after saving the Student------"
+  end
   
   after_update do |student|
     puts "------You have Successfully Updated Student!------"
