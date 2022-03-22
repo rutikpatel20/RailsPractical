@@ -52,12 +52,12 @@ class Student < ApplicationRecord
 
   after_save :email_student
     
+  after_destroy :destroy_student, if: Proc.new { |student| student.department == "IT" }
+
   def email_student
     puts "------This Callback is running after validating email - Email Validated------"
   end
     
-  after_destroy :destroy_student, if: Proc.new { |student| student.department == "IT" }
-
   def destroy_student
     puts "------Student destroyed successfully------"
   end
