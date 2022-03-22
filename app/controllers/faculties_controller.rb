@@ -8,7 +8,7 @@ class FacultiesController < ApplicationController
   end
 
   def create
-    @faculty = Faculty.create(params.require(:faculty).permit(:firstname, :lastname, :phone_number, :email, :birthdate, :department, :designation))
+    @faculty = Faculty.create(faculty_params)
     if @faculty.valid?
       flash[:errors] = "Faculty Added Successfully"
       redirect_to faculties_path
@@ -28,7 +28,7 @@ class FacultiesController < ApplicationController
 
   def update
     @faculty = Faculty.find(params[:id])
-    if @faculty.update(params.require(:faculty).permit(:firstname, :lastname, :phone_number, :email, :birthdate, :department, :designation))
+    if @faculty.update(faculty_params)
       flash[:errors] = "Faculty Updated Successfully"
       redirect_to faculty_path(@faculty)
     else
@@ -46,5 +46,10 @@ class FacultiesController < ApplicationController
       flash[:errors] = @faculty.errors.full_messages
       redirect_to destroy_faculty_path
     end
+  end
+
+  private
+  def faculty_params
+    params.require(:faculty).permit(:firstname, :lastname, :phone_number, :email, :birthdate, :department, :designation)
   end
 end

@@ -30,4 +30,36 @@ class Faculty < ApplicationRecord
     end
   end
 
+  # Callbacks
+  after_initialize do |faculty|
+    puts "------You have initialized an object of Faculty!------"
+  end
+
+  after_find do |faculty|
+    puts "------You have found an object in Faculty!------"
+  end
+
+  after_create do |faculty|
+    puts "------This Callback is running after creating the Faculty------"
+  end
+
+  after_touch do |faculty|
+    puts "------This Callback is running after Touching the Faculty------"
+  end
+  
+  after_update do |faculty|
+    puts "------This Callback is running after Updating the Faculty------"
+  end
+
+  after_destroy do |faculty|
+    puts "------This Callback is running after Destroying the Faculty------"
+  end
+
+  after_validation :birthdate
+    puts "------This Callback is running after validating birthdate - Birthdate is valid------"
+
+  after_commit do |faculty|
+    puts "------This Callback is running after Commit in the Faculty------"
+  end
+
 end
