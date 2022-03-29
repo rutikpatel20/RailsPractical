@@ -27,6 +27,9 @@ gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
+# Fontawesome Gem
+gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.8'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
