@@ -1,0 +1,312 @@
+<%= render 'layouts/navbar' %>
+<div class="center flex-column" style = "height: auto;">
+  <h1>Tasks</h1>
+
+  <h3 class="mt-4 mb-3"> Task 5 - Employees having age > 20 and 40 </h3>
+  <div>
+    <table class="table table-info table-striped">
+      <ol class="fs-2">
+        <thead class="table-secondary">
+          <td class="text-center"> Id </td>
+          <td class="text-center"> Name </td>
+          <td class="text-center"> Email </td>
+          <td class="text-center"> Age </td>
+        </thead>
+        <% Employee.where("age > 20 and age <40").each do |e| %>
+          <tr>
+            <td class="text-center"> <%= e.id %> </td>
+            <td class="text-center"> <%= link_to e.firstname + " " + e.lastname, employee_path(e) %> </td>
+            <td class="text-center"> <%= e.email %> </td>
+            <td class="text-center"> <%= e.age %> </td>
+          </tr>
+        <% end %>
+      </ol>
+    </table>
+  </div>
+
+  <h3 class="mt-4 mb-3"> Task 6 - Employees which are full_time_available </h3>
+  <div>
+    <table class="table table-info table-striped">
+      <ol class="fs-2">
+        <thead class="table-secondary">
+          <td class="text-center"> Id </td>
+          <td class="text-center"> Name </td>
+          <td class="text-center"> Email </td>
+          <td class="text-center"> Age </td>
+        </thead>
+        <% Employee.where("full_time_available = true").each do |e| %>
+          <tr>
+            <td class="text-center"> <%= e.id %> </td>
+            <td class="text-center"> <%= link_to e.firstname + " " + e.lastname, employee_path(e) %> </td>
+            <td class="text-center"> <%= e.email %> </td>
+            <td class="text-center"> <%= e.age %> </td>
+          </tr>
+        <% end %>
+      </ol>
+    </table>
+  </div>
+
+  <h3 class="mt-4 mb-3"> Task 7 - Employees which have exact 5 number of orders and age > 25 </h3>
+  <div>
+    <table class="table table-info table-striped">
+      <ol class="fs-2">
+        <thead class="table-secondary">
+          <td class="text-center"> Id </td>
+          <td class="text-center"> Name </td>
+          <td class="text-center"> No Of Orders </td>
+          <td class="text-center"> Age </td>
+        </thead>
+        <% Employee.where("no_of_order = 5 and age > 25").each do |e| %>
+          <tr>
+            <td class="text-center"> <%= e.id %> </td>
+            <td class="text-center"> <%= link_to e.firstname + " " + e.lastname, employee_path(e) %> </td>
+            <td class="text-center"> <%= e.no_of_order %> </td>
+            <td class="text-center"> <%= e.age %> </td>
+          </tr>
+        <% end %>
+      </ol>
+    </table>
+  </div>
+
+  <h3 class="mt-4 mb-3"> Task 8 - Employees which are created before today </h3>
+  <div>
+    <table class="table table-info table-striped">
+      <ol class="fs-2">
+        <thead class="table-secondary">
+          <td class="text-center"> Id </td>
+          <td class="text-center"> Name </td>
+          <td class="text-center"> Email </td>
+          <td class="text-center"> Created On </td>
+        </thead>
+        <% Employee.where("created_at < ?", 1.days.ago).each do |e| %>
+          <tr>
+            <td class="text-center"> <%= e.id %> </td>
+            <td class="text-center"> <%= link_to e.firstname + " " + e.lastname, employee_path(e) %> </td>
+            <td class="text-center"> <%= e.email %> </td>
+            <td class="text-center"> <%= e.created_at %> </td>
+          </tr>
+        <% end %>
+      </ol>
+    </table>
+  </div>
+  
+  <h3 class="mt-4 mb-3"> Task 9 - Employees which have exact 5 number of orders Or age < 25 </h3>
+  <div>
+    <table class="table table-info table-striped">
+      <ol class="fs-2">
+        <thead class="table-secondary">
+          <td class="text-center"> Id </td>
+          <td class="text-center"> Name </td>
+          <td class="text-center"> No Of Orders </td>
+          <td class="text-center"> Age </td>
+        </thead>
+        <% Employee.where("no_of_order = 5 and age < 25").each do |e| %>
+          <tr>
+            <td class="text-center"> <%= e.id %> </td>
+            <td class="text-center"> <%= link_to e.firstname + " " + e.lastname, employee_path(e) %> </td>
+            <td class="text-center"> <%= e.no_of_order %> </td>
+            <td class="text-center"> <%= e.age %> </td>
+          </tr>
+        <% end %>
+      </ol>
+    </table>
+  </div>
+
+  <h3 class="mt-4 mb-3"> Task 10 - employees in descending order by age </h3>
+  <div>
+    <table class="table table-info table-striped">
+      <ol class="fs-2">
+        <thead class="table-secondary">
+          <td class="text-center"> Id </td>
+          <td class="text-center"> Name </td>
+          <td class="text-center"> Email </td>
+          <td class="text-center"> Age </td>
+        </thead>
+        <% Employee.order("age DESC").each do |e| %>
+          <tr>
+            <td class="text-center"> <%= e.id %> </td>
+            <td class="text-center"> <%= link_to e.firstname + " " + e.lastname, employee_path(e) %> </td>
+            <td class="text-center"> <%= e.email %> </td>
+            <td class="text-center"> <%= e.age %> </td>
+          </tr>
+        <% end %>
+      </ol>
+    </table>
+  </div>
+
+  <h3 class="mt-4 mb-3"> Task 11 - employees in ascending order by number of order </h3>
+  <div>
+    <table class="table table-info table-striped">
+      <ol class="fs-2">
+        <thead class="table-secondary">
+          <td class="text-center"> Id </td>
+          <td class="text-center"> Name </td>
+          <td class="text-center"> Email </td>
+          <td class="text-center"> No Of Order </td>
+        </thead>
+        <% Employee.order("no_of_order ASC").each do |e| %>
+          <tr>
+            <td class="text-center"> <%= e.id %> </td>
+            <td class="text-center"> <%= link_to e.firstname + " " + e.lastname, employee_path(e) %> </td>
+            <td class="text-center"> <%= e.email %> </td>
+            <td class="text-center"> <%= e.no_of_order %> </td>
+          </tr>
+        <% end %>
+      </ol>
+    </table>
+  </div>
+
+  <h3 class="mt-4 mb-3"> Task 12 - employees having salary > 45000 </h3>
+  <div>
+    <table class="table table-info table-striped">
+      <ol class="fs-2">
+        <thead class="table-secondary">
+          <td class="text-center"> Id </td>
+          <td class="text-center"> Name </td>
+          <td class="text-center"> Email </td>
+          <td class="text-center"> Salary </td>
+        </thead>
+        <% Employee.where("salary > 45000").each do |e| %>
+          <tr>
+            <td class="text-center"> <%= e.id %> </td>
+            <td class="text-center"> <%= link_to e.firstname + " " + e.lastname, employee_path(e) %> </td>
+            <td class="text-center"> <%= e.email %> </td>
+            <td class="text-center"> <%= e.salary %> </td>
+          </tr>
+        <% end %>
+      </ol>
+    </table>
+  </div>
+
+  <h3 class="mt-4 mb-3"> Task 13 - Group employees by no_of_order with them and display employees with no_of_order > 5 </h3>
+  <div>
+    <table class="table table-info table-striped">
+      <ol class="fs-2">
+        <thead class="table-secondary">
+          <td class="text-center"> Id </td>
+          <td class="text-center"> Name </td>
+          <td class="text-center"> Email </td>
+          <td class="text-center"> No of Order </td>
+        </thead>
+        <% Employee.group("no_of_order").having("no_of_order > ?",5).each do |e| %>
+          <tr>
+            <td class="text-center"> <%= e.id %> </td>
+            <td class="text-center"> <%= link_to e.firstname + " " + e.lastname, employee_path(e) %> </td>
+            <td class="text-center"> <%= e.email %> </td>
+            <td class="text-center"> <%= e.no_of_order %> </td>
+          </tr>
+        <% end %>
+      </ol>
+    </table>
+  </div>
+
+  <h3 class="mt-4 mb-3"> Task 14 - Write example for keywords unscope, only, reselect, reorder, reverse_order </h3>
+  <h4 class="mt-3 mb-3 px-3 text-warning bg-dark"> Task 14 - 1 Example for unscope </h4>
+  <div>
+    <table class="table table-info table-striped">
+      <ol class="fs-2">
+        <thead class="table-secondary">
+          <td class="text-center"> Id </td>
+          <td class="text-center"> Name </td>
+          <td class="text-center"> Email </td>
+          <td class="text-center"> Salary </td>
+        </thead>
+        <% Employee.where("salary > 45000").limit(5).unscope(:limit).each do |e| %>
+          <tr>
+            <td class="text-center"> <%= e.id %> </td>
+            <td class="text-center"> <%= link_to e.firstname + " " + e.lastname, employee_path(e) %> </td>
+            <td class="text-center"> <%= e.email %> </td>
+            <td class="text-center"> <%= e.salary %> </td>
+          </tr>
+        <% end %>
+      </ol>
+    </table>
+  </div>
+
+  <h4 class="mt-3 mb-3 px-3 text-warning bg-dark"> Task 14 - 2 Example for only </h4>
+  <div>
+    <table class="table table-info table-striped">
+      <ol class="fs-2">
+        <thead class="table-secondary">
+          <td class="text-center"> Id </td>
+          <td class="text-center"> Name </td>
+          <td class="text-center"> Email </td>
+          <td class="text-center"> Salary </td>
+        </thead>
+        <% Employee.where("salary > 45000").limit(5).order('id desc').only(:where, :limit).each do |e| %>
+          <tr>
+            <td class="text-center"> <%= e.id %> </td>
+            <td class="text-center"> <%= link_to e.firstname + " " + e.lastname, employee_path(e) %> </td>
+            <td class="text-center"> <%= e.email %> </td>
+            <td class="text-center"> <%= e.salary %> </td>
+          </tr>
+        <% end %>
+      </ol>
+    </table>
+  </div>
+
+  <h4 class="mt-3 mb-3 px-3 text-warning bg-dark"> Task 14 - 3 Example for reselect </h4>
+  <div>
+    <table class="table table-info table-striped">
+      <ol class="fs-2">
+        <thead class="table-secondary">
+          <%# <td class="text-center"> Salary </td> %>
+          <td class="text-center"> Id </td>
+          <td class="text-center"> Name </td>
+          <td class="text-center"> Email </td>
+        </thead>
+        <% Employee.select(:salary).reselect(:id, :firstname, :lastname, :email ).limit(5).each do |e| %>
+          <tr>
+            <td class="text-center"> <%= e.id %> </td>
+            <td class="text-center"> <%= link_to e.firstname + " " + e.lastname, employee_path(e) %> </td>
+            <td class="text-center"> <%= e.email %> </td>
+          </tr>
+        <% end %>
+      </ol>
+    </table>
+  </div>
+
+  <h4 class="mt-3 mb-3 px-3 text-warning bg-dark"> Task 14 - 4 Example for reorder </h4>
+  <div>
+    <table class="table table-info table-striped">
+      <ol class="fs-2">
+        <thead class="table-secondary">
+          <td class="text-center"> Id </td>
+          <td class="text-center"> Name </td>
+          <td class="text-center"> Email </td>
+          <td class="text-center"> Salary </td>
+        </thead>
+        <% Employee.where("age > 25").order('id desc').reorder(:id).each do |e| %>
+          <tr>
+            <td class="text-center"> <%= e.id %> </td>
+            <td class="text-center"> <%= link_to e.firstname + " " + e.lastname, employee_path(e) %> </td>
+            <td class="text-center"> <%= e.email %> </td>
+            <td class="text-center"> <%= e.salary %> </td>
+          </tr>
+        <% end %>
+      </ol>
+    </table>
+  </div>
+
+  <h4 class="mt-3 mb-3 px-3 text-warning bg-dark"> Task 14 - 5 Example for reverse_order </h4>
+  <div>
+    <table class="table table-info table-striped">
+      <ol class="fs-2">
+        <thead class="table-secondary">
+          <td class="text-center"> Id </td>
+          <td class="text-center"> Name </td>
+          <td class="text-center"> Email </td>
+          <td class="text-center"> Salary </td>
+        </thead>
+        <% Employee.where("age > 25").order(:id).reverse_order.each do |e| %>
+          <tr>
+            <td class="text-center"> <%= e.id %> </td>
+            <td class="text-center"> <%= link_to e.firstname + " " + e.lastname, employee_path(e) %> </td>
+            <td class="text-center"> <%= e.email %> </td>
+            <td class="text-center"> <%= e.salary %> </td>
+          </tr>
+        <% end %>
+      </ol>
+    </table>
+  </div>
+</div>
