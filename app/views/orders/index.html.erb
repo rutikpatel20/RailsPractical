@@ -1,0 +1,106 @@
+<%= render 'layouts/navbar' %>
+<div class="center flex-column" style = "height: auto;">
+
+  <h1> Order </h1>
+
+  <!--Error Message-->
+  <% if flash[:errors] %>
+    <% flash.each do |name,message| %>
+      <p class="text-danger"><%= message%></p>
+    <% end %>
+  <% end %>
+
+  <!-- Customer Table -->
+  <div>
+    <table class="table table-info table-striped">
+      <ol class="fs-2">
+        <thead class="table-secondary">
+          <td class="text-center"> Order ID </td>
+          <td class="text-center"> Customer Name </td>
+          <td class="text-center"> Customer  Email </td>
+          <td class="text-center"> Customer  Phone </td>
+          <td class="text-center"> Product Title </td>
+          <td class="text-center"> Product Price </td>
+          <td class="text-center"> Quantity </td>
+          <td class="text-center"> Total Price </td>
+          <td class="text-center"> Status </td>
+          <td colspan=3 class="text-center"> Action </td>
+        </thead>
+
+        <% @orders.each do |order| %>
+          <tr>
+            <td class="text-center"> <%= order.id %> </td>
+            <td class="text-center"> <%= order.customer.fname + " "+ order.customer.lname %> </td>
+            <td class="text-center"> <%= order.customer.email %> </td>
+            <td class="text-center"> <%= order.customer.phone_number %> </td>
+            <td class="text-center"> <%= order.myproduct.title %> </td>
+            <td class="text-center"> <%= order.myproduct.price %> </td>
+            <td class="text-center"> <%= order.quantity %> </td>
+            <td class="text-center"> <%= order.total_price %> </td>
+            <td class="text-center"> <%= order.status %> </td>
+            
+            <td class="text-center"><%= button_to "Show",order_path(order),method: :get, class:"btn-success border-0 rounded-pill shadow px-3 py-2" %></td>
+            <td class="text-center"><%= button_to "Edit",edit_order_path(order),method: :get, class:"btn-primary border-0 rounded-pill shadow px-3 py-2" %></td>
+            <td class="text-center"><%= button_to "Delete",order_path(order),method: :delete, class:"btn-danger border-0 rounded-pill shadow px-3 py-2" %></td>
+
+          </tr>
+        <% end %>
+      </ol>
+    </table>
+  </div>
+
+  <div class="d-flex">
+    <%= button_to fa_icon("plus", text: "Book Order"), new_order_path, method: :get ,class:"btn-warning border-0 rounded-pill shadow p-3 m-3" %>
+    <%= button_to fa_icon("handshake-o", text: "Customer Page"), myproducts_path, method: :get ,class:"btn-warning border-0 rounded-pill shadow p-3 m-3" %>
+    <%= button_to fa_icon("cube", text: "Product Page"), myproducts_path, method: :get ,class:"btn-warning border-0 rounded-pill shadow p-3 m-3" %>
+  
+  </div>
+
+  <%= form_tag orders_path, :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:search], placeholder:'Search by order status' %>
+    <%= submit_tag "Search" %>
+  </p>
+  <% end %>
+
+  <%= form_tag orders_path, :method => 'get' do %>
+
+<p>
+
+      <%= text_field_tag :title, params[:title], placeholder:'Search by product name' %>
+      <%= submit_tag "Search" %>
+      </p>
+      <% end %>
+      <% if flash[:notice] %>
+      <% flash.each do |name, msg| %>
+      <span style="color:red;"> <%= msg %> </span>
+      <% end %>
+      <% end %><br>
+      <%if !(params[:title].blank?) %>
+      <table class="tabl" >
+      <thead>
+      <tr>
+      <th>Product Name</th>
+      <th>Order ID</th>
+      <th>Quantity</th>
+      <th>Total Price</th>
+      <th>Status</th>
+      </tr>
+      </thead>
+      <tbody>
+
+      <% @orders_by_product.each do |order| %>
+
+      <tr>
+        <td><%= order.myproduct.title %></td>
+        <td><%= order.id %></td>
+        <td><%= order.quantity %></td>
+        <td><%= order.total_price %></td>
+        <td><%= order.status %></td>
+      </tr>
+      <% end %>
+      </tbody>
+      </table>
+
+<% end %>
+</div>

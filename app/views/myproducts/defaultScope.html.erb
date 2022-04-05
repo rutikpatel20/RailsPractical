@@ -1,0 +1,37 @@
+<div class="center flex-column" style = "height: auto;">
+
+  <h1> Default Scope </h1>
+
+<!-- Product Table -->
+  <div>
+    <table class="table table-info table-striped">
+      <ol class="fs-2">
+        <thead class="table-secondary">
+          <td class="text-center"> Title </td>
+          <td class="text-center"> Description </td>
+          <td class="text-center"> Price </td>
+          <td class="text-center"> Capacity </td>
+          <td class="text-center"> is_active </td>
+          <td class="text-center"> Status </td>
+          <td colspan=3 class="text-center"> Action </td>
+        </thead>
+
+        <% @myproductscope.each do |myproduct| %>
+          <tr>
+            <td class="text-center"> <%= link_to myproduct.title, myproduct_path(myproduct) %> </td>
+            <td class="text-center"> <%= myproduct.description %> </td>
+            <td class="text-center"> <%= myproduct.price %> </td>
+            <td class="text-center"> <%= myproduct.capacity %> </td>
+            <td class="text-center"> <%= myproduct.is_active %> </td>
+            <td class="text-center"> <%= myproduct.status %> </td>
+            
+            <td class="text-center"><%= button_to "Show",myproduct_path(myproduct),method: :get, class:"btn-success border-0 rounded-pill shadow px-3 py-2" %></td>
+            <td class="text-center"><%= button_to "Edit",edit_myproduct_path(myproduct),method: :get, class:"btn-primary border-0 rounded-pill shadow px-3 py-2" %></td>
+            <td class="text-center"><%= button_to "Delete",myproduct_path(myproduct),method: :delete, class:"btn-danger border-0 rounded-pill shadow px-3 py-2" %></td>
+
+          </tr>
+        <% end %>
+      </ol>
+    </table>
+  </div>
+</div>

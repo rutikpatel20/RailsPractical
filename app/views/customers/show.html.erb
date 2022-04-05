@@ -1,0 +1,26 @@
+<%= render 'layouts/navbar' %>
+<!-- customer Details Showing -->
+<div class="center flex-column">
+  <h1>customer Details</h1>
+
+  <!--Error Message-->
+  <% if flash[:errors] %>
+    <% flash.each do |name,message| %>
+      <p class="text-danger"><%= message%></p>
+    <% end %>
+  <% end %>
+
+  <div>
+    <h2> &#10145; First Name: <%= @customer.fname %> </h2>
+    <h2> &#10145; Last Name: <%= @customer.lname %> </h2>
+    <h2> &#10145; Email: <%= @customer.email %> </h2>
+    <h2> &#10145; Phone Number: <%= @customer.phone_number %> </h2>
+  </div>
+
+  <div class="d-flex">
+    <%= button_to "Edit customer" , edit_customer_path, method: :get ,class:"btn-success border-0 rounded-pill shadow p-2 m-2" %>
+    <%= button_to "Delete customer", customer_path, method: :delete ,class:"btn-danger border-0 rounded-pill shadow p-2 m-2" %>
+    <%= button_to "View all customers", customers_path,method: :get ,class:"btn-primary border-0 rounded-pill shadow p-2 m-2" %>
+  </div>
+  
+</div>

@@ -1,4 +1,25 @@
 Rails.application.routes.draw do
+  get 'orders/index'
+  get 'orders/new'
+  get 'orders/create'
+  get 'orders/show'
+  get 'orders/edit'
+  get 'orders/update'
+  get 'orders/destroy'
+  get 'customers/index'
+  get 'customers/new'
+  get 'customers/create'
+  get 'customers/show'
+  get 'customers/edit'
+  get 'customers/update'
+  get 'customers/destroy'
+  get 'myproducts/index'
+  get 'myproducts/new'
+  get 'myproducts/create'
+  get 'myproducts/show'
+  get 'myproducts/edit'
+  get 'myproducts/update'
+  get 'myproducts/destroy'
   get 'employees/index'
   get 'employees/new'
   get 'employees/create'
@@ -30,9 +51,17 @@ Rails.application.routes.draw do
   resources :students
 
   #for Employees
-  root "employees#index"
+  # root "employees#index"
   post '/increaseOrder', to: "employees#increaseOrder"
   post '/decreaseOrder', to: "employees#decreaseOrder"
   get 'employees/task'
   resources :employees
+
+
+  root "myproducts#index"
+  get 'myproducts/defaultScope'
+  get 'orders/root'
+  resources :myproducts
+  resources :customers
+  resources :orders
 end

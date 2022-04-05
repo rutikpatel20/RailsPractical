@@ -1,0 +1,103 @@
+<div class="center flex-column" style = "height: auto;">
+<h3>Tasks</h3>
+<h3 class="mt-4 mb-3"> Task - most sales product by quantity </h3>
+  <div>
+    <table class="table table-info table-striped">
+      <ol class="fs-2">
+        <thead class="table-secondary">
+          <td class="text-center"> Customer Id </td>
+          <td class="text-center"> Name </td>
+          <td class="text-center"> Sum Of Quantity </td>
+        </thead>
+        
+        <% Order.select("customer_id, sum(quantity) as Sum_Quantity").group("customer_id").order(Sum_Quantity: :desc).first(3).each do |o| %>
+          <tr>
+            <td class="text-center"> <%= o.customer_id %> </td>
+            <td class="text-center"> <%= o.customer.fname + " " + o.customer.lname %> </td>
+            <td class="text-center"> <%= o.Sum_Quantity %> </td>
+
+          </tr>
+        <% end %>
+      </ol>
+    </table>
+  </div>
+
+<h3 class="mt-4 mb-3"> Task - most sales product by price </h3>
+  <div>
+    <table class="table table-info table-striped">
+      <ol class="fs-2">
+        <thead class="table-secondary">
+          <td class="text-center"> Customer Id </td>
+          <td class="text-center"> Name </td>
+          <td class="text-center"> Sum Of Total Price </td>
+        </thead>
+        
+        <% Order.select("customer_id, sum(total_price) as Sum_TotalPrice").group("customer_id").order(Sum_TotalPrice: :desc).first(3).each do |o| %>
+          <tr>
+            <td class="text-center"> <%= o.customer_id %> </td>
+            <td class="text-center"> <%= o.customer.fname + " " + o.customer.lname %> </td>
+            <td class="text-center"> <%= o.Sum_TotalPrice %> </td>
+
+          </tr>
+        <% end %>
+      </ol>
+    </table>
+  </div>
+
+<h3 class="mt-4 mb-3"> top 5 customer who has maximum booked orders  </h3>
+  <div>
+    <table class="table table-info table-striped">
+      <ol class="fs-2">
+        <thead class="table-secondary">
+          <td class="text-center"> Total Booked Orders </td>
+          <td class="text-center"> Name </td>
+          <td class="text-center"> Email </td>
+          <td class="text-center"> Phone </td>
+        </thead>
+        
+        <% Order.group(:customer_id).where(status:0).each do |o| %>
+          <tr>
+          
+            <td class="text-center"> <%= Order.where(customer_id:o.customer_id).where(status:0).count %> </td>
+            <td class="text-center"> <%= o.customer.fname + " " + o.customer.lname %> </td>
+            <td class="text-center"> <%= o.customer.email %> </td>
+            <td class="text-center"> <%= o.customer.phone_number %> </td>
+
+          </tr>
+        <% end %>
+      </ol>
+    </table>
+  </div>
+
+<h3 class="mt-4 mb-3"> top 5 customer who has maximum cancelled orders  </h3>
+  <div>
+    <table class="table table-info table-striped">
+      <ol class="fs-2">
+        <thead class="table-secondary">
+          <td class="text-center"> Total cancelled Orders </td>
+          <td class="text-center"> Name </td>
+          <td class="text-center"> Email </td>
+          <td class="text-center"> Phone </td>
+        </thead>
+        
+        <% Order.group(:customer_id).where(status:1).each do |o| %>
+          <tr>
+          
+            <td class="text-center"> <%= Order.where(customer_id:o.customer_id).where(status:1).count %> </td>
+            <td class="text-center"> <%= o.customer.fname + " " + o.customer.lname %> </td>
+            <td class="text-center"> <%= o.customer.email %> </td>
+            <td class="text-center"> <%= o.customer.phone_number %> </td>
+
+          </tr>
+        <% end %>
+      </ol>
+    </table>
+  </div>
+
+  <div class="d-flex">
+    <%= button_to fa_icon("cube", text: "Product"), myproducts_path, method: :get ,class:"btn-warning border-0 rounded-pill shadow p-3 m-3" %>
+    <%= button_to fa_icon("handshake-o", text: "Customer Page"), customers_path, method: :get ,class:"btn-warning border-0 rounded-pill shadow p-3 m-3" %>
+    <%= button_to fa_icon("shopping-cart", text: "Order Page"), orders_path, method: :get ,class:"btn-info border-0 rounded-pill shadow p-3 m-3" %>
+  </div>
+
+</div>
