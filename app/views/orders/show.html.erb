@@ -1,0 +1,30 @@
+<%= render 'layouts/navbar' %>
+<!-- order Details Showing -->
+<div class="center flex-column">
+  <h1>order Details</h1>
+
+  <!--Error Message-->
+  <% if flash[:errors] %>
+    <% flash.each do |name,message| %>
+      <p class="text-danger"><%= message%></p>
+    <% end %>
+  <% end %>
+
+  <div>
+    <h2> &#10145; First Name: <%= @order.customer.fname %> </h2>
+    <h2> &#10145; Last Name: <%= @order.customer.lname %> </h2>
+    <h2> &#10145; Email: <%= @order.customer.email %> </h2>
+    <h2> &#10145; Product: <%= @order.myproduct.title %> </h2>
+    <h2> &#10145; Product: <%= @order.myproduct.price %> </h2>
+    <h2> &#10145; Quantity: <%= @order.quantity %> </h2>
+    <h2> &#10145; Total Price: <%= @order.total_price %> </h2>
+    <h2> &#10145; Status: <%= @order.status %> </h2>
+  </div>
+
+  <div class="d-flex">
+    <%= button_to "Edit order" , edit_order_path, method: :get ,class:"btn-success border-0 rounded-pill shadow p-2 m-2" %>
+    <%= button_to "Delete order", order_path, method: :delete ,class:"btn-danger border-0 rounded-pill shadow p-2 m-2" %>
+    <%= button_to "View all orders", orders_path,method: :get ,class:"btn-primary border-0 rounded-pill shadow p-2 m-2" %>
+  </div>
+  
+</div>

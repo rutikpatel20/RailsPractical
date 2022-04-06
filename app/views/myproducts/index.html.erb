@@ -1,0 +1,51 @@
+<%= render 'layouts/navbar' %>
+<div class="center flex-column" style = "height: auto;">
+  <h1> MyProducts </h1>
+
+  <!--Error Message-->
+  <% if flash[:errors] %>
+    <% flash.each do |name,message| %>
+      <p class="text-danger"><%= message%></p>
+    <% end %>
+  <% end %>
+
+  <!-- Product Table -->
+  <div>
+    <table class="table table-info table-striped">
+      <ol class="fs-2">
+        <thead class="table-secondary">
+          <td class="text-center"> Title </td>
+          <td class="text-center"> Description </td>
+          <td class="text-center"> Price </td>
+          <td class="text-center"> Capacity </td>
+          <td class="text-center"> is_active </td>
+          <td class="text-center"> Status </td>
+          <td colspan=3 class="text-center"> Action </td>
+        </thead>
+
+        <% @myproducts.each do |myproduct| %>
+          <tr>
+            <td class="text-center"> <%= link_to myproduct.title, myproduct_path(myproduct) %> </td>
+            <td class="text-center"> <%= myproduct.description %> </td>
+            <td class="text-center"> <%= myproduct.price %> </td>
+            <td class="text-center"> <%= myproduct.capacity %> </td>
+            <td class="text-center"> <%= myproduct.is_active %> </td>
+            <td class="text-center"> <%= myproduct.status %> </td>      
+            
+            <td class="text-center"><%= button_to "Show",myproduct_path(myproduct),method: :get, class:"btn-success border-0 rounded-pill shadow px-3 py-2" %></td>
+            <td class="text-center"><%= button_to "Edit",edit_myproduct_path(myproduct),method: :get, class:"btn-primary border-0 rounded-pill shadow px-3 py-2" %></td>
+            <td class="text-center"><%= button_to "Delete",myproduct_path(myproduct),method: :delete, class:"btn-danger border-0 rounded-pill shadow px-3 py-2" %></td>
+          </tr>
+        <% end %>
+      </ol>
+    </table>
+  </div>
+
+  <div class="d-flex">
+    <%= button_to fa_icon("plus", text: "Add New Product"), new_myproduct_path, method: :get ,class:"btn-warning border-0 rounded-pill shadow p-3 m-3" %>
+    <%= button_to fa_icon("tasks", text: "Default Scope"), myproducts_defaultScope_path, method: :get ,class:"btn-info border-0 rounded-pill shadow p-3 m-3" %>
+    <%= button_to fa_icon("handshake-o", text: "Customer Page"), customers_path, method: :get ,class:"btn-warning border-0 rounded-pill shadow p-3 m-3" %>
+    <%= button_to fa_icon("shopping-cart", text: "Order Page"), orders_path, method: :get ,class:"btn-info border-0 rounded-pill shadow p-3 m-3" %>
+  </div>
+
+</div>
