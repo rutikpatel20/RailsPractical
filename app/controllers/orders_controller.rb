@@ -1,21 +1,15 @@
 class OrdersController < ApplicationController
   def index
-    if params[:search]
-        @orders = Order.all
-        @orders = Order.where(status:'Booked') if params[:search] == 'Booked'
-        @orders = Order.where(status:'Cancelled') if params[:search] == 'Cancelled'
-      else
+    searchParams = [:filter_search, :product_search]
+    if params[:searchParams]
       @orders = Order.all
-      end
+      @orders = Order.where(status:'Booked') if params[:searchParams] == 'Booked'
+      @orders = Order.where(status:'Cancelled') if params[:searchParams] == 'Cancelled'
+      @orders_by_product = Order.where("myproduct_id=?",Myproduct.where("title = ?",params[:searchParams]).pluck(:id))
+    else
+      @orders = Order.all
+    end
 
-      begin
-        if !(params[:title].blank?)
-          @orders_by_product = Myproduct.where(["title LIKE ?","%#{params[:title]}%"])[0].orders
-        end
-        rescue Exception
-          flash[:notice] = "Record not found!"
-          redirect_to orders_path
-        end
   end
 
   def new
@@ -72,9 +66,11 @@ class OrdersController < ApplicationController
   end
 
   def root
-  
+    @SumOfQuantity = Order.select("customer_id, sum(quantity) as Sum_Quantity").group("customer_id").order(Sum_Quantity: :desc).first(3)
+    @SumOfPrice = Order.select("customer_id, sum(total_price) as Sum_TotalPrice").group("customer_id").order(Sum_TotalPrice: :desc).first(3)
+    @MaximumBooked = Order.group(:customer_id).where(status:0)
+    @MaximumCancelled = Order.group(:customer_id).where(status:1)
   end
-  
 
   private
   def order_params

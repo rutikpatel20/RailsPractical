@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_05_133816) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_06_100906) do
   create_table "authors", force: :cascade do |t|
     t.string "firstname"
     t.string "lastname"
@@ -76,7 +76,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_05_133816) do
     t.index ["imageable_type", "imageable_id"], name: "index_images_on_imageable"
   end
 
-  create_table "my_products", force: :cascade do |t|
+  create_table "myproducts", force: :cascade do |t|
     t.string "title"
     t.string "description"
     t.integer "price"
@@ -93,6 +93,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_05_133816) do
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "customer_id"
+    t.integer "myproduct_id"
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
+    t.index ["myproduct_id"], name: "index_orders_on_myproduct_id"
   end
 
   create_table "products", force: :cascade do |t|

@@ -1,7 +1,35 @@
-<%= render 'layouts/navbar' %>
-<div class="center flex-column" style = "height: auto;">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+  <div class="container-fluid">
+    <a href="/" class="me-5"><%=image_tag("Simform.svg") %></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active " aria-current="page" href="/">Products</a>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Customers', customers_path, class: 'nav-link active' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Order', orders_path, class: 'nav-link active' %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
+<div class="center flex-column" style = "height: auto;">
   <h1> Order </h1>
+
+  <!-- Search bar for filter with Order Status and Search by Product Name -->
+  <form class="d-flex mb-3">
+    <%= form_tag orders_path, :method => 'get' do %>
+      <%= text_field_tag :searchParams, params[:searchParams], placeholder:'Filter by Order Status', class:"form-control me-2" %>
+      <%= submit_tag "Filter", class:"btn btn-outline-success" %>
+    <% end %>
+  </form>
 
   <!--Error Message-->
   <% if flash[:errors] %>
@@ -42,7 +70,6 @@
             <td class="text-center"><%= button_to "Show",order_path(order),method: :get, class:"btn-success border-0 rounded-pill shadow px-3 py-2" %></td>
             <td class="text-center"><%= button_to "Edit",edit_order_path(order),method: :get, class:"btn-primary border-0 rounded-pill shadow px-3 py-2" %></td>
             <td class="text-center"><%= button_to "Delete",order_path(order),method: :delete, class:"btn-danger border-0 rounded-pill shadow px-3 py-2" %></td>
-
           </tr>
         <% end %>
       </ol>
@@ -51,56 +78,43 @@
 
   <div class="d-flex">
     <%= button_to fa_icon("plus", text: "Book Order"), new_order_path, method: :get ,class:"btn-warning border-0 rounded-pill shadow p-3 m-3" %>
-    <%= button_to fa_icon("handshake-o", text: "Customer Page"), myproducts_path, method: :get ,class:"btn-warning border-0 rounded-pill shadow p-3 m-3" %>
-    <%= button_to fa_icon("cube", text: "Product Page"), myproducts_path, method: :get ,class:"btn-warning border-0 rounded-pill shadow p-3 m-3" %>
-  
+    <%= button_to fa_icon("handshake-o", text: "Customer Page"), myproducts_path, method: :get ,class:"btn-success border-0 rounded-pill shadow p-3 m-3" %>
+    <%= button_to fa_icon("cube", text: "Product Page"), myproducts_path, method: :get ,class:"btn-info border-0 rounded-pill shadow p-3 m-3" %>
+    <%= button_to fa_icon("tree", text: "Root Page"), orders_root_path, method: :get ,class:"btn-danger border-0 rounded-pill shadow p-3 m-3" %>
   </div>
 
-  <%= form_tag orders_path, :method => 'get' do %>
-  <p>
-    <%= text_field_tag :search, params[:search], placeholder:'Search by order status' %>
-    <%= submit_tag "Search" %>
-  </p>
+  <!-- Error Message for record not found -->
+  <% if flash[:notice] %>
+    <% flash.each do |name,message| %>
+      <p class="text-danger"><%= message%></p>
+    <% end %>
   <% end %>
 
-  <%= form_tag orders_path, :method => 'get' do %>
+  <!-- Table for search by Product name -->
+  <div>
+    <table class="table table-info table-striped">
+        <% if !(params[:searchParams].blank?) %>
+          <ol class="fs-2">
+            <thead class="table-secondary">
+              <td class="text-center"> Product Name </td>
+              <td class="text-center"> Order ID </td>
+              <td class="text-center"> Quantity </td>
+              <td class="text-center"> Total Price </td>
+              <td class="text-center"> Status </td>
+            </thead>
 
-<p>
-
-      <%= text_field_tag :title, params[:title], placeholder:'Search by product name' %>
-      <%= submit_tag "Search" %>
-      </p>
-      <% end %>
-      <% if flash[:notice] %>
-      <% flash.each do |name, msg| %>
-      <span style="color:red;"> <%= msg %> </span>
-      <% end %>
-      <% end %><br>
-      <%if !(params[:title].blank?) %>
-      <table class="tabl" >
-      <thead>
-      <tr>
-      <th>Product Name</th>
-      <th>Order ID</th>
-      <th>Quantity</th>
-      <th>Total Price</th>
-      <th>Status</th>
-      </tr>
-      </thead>
-      <tbody>
-
-      <% @orders_by_product.each do |order| %>
-
-      <tr>
-        <td><%= order.myproduct.title %></td>
-        <td><%= order.id %></td>
-        <td><%= order.quantity %></td>
-        <td><%= order.total_price %></td>
-        <td><%= order.status %></td>
-      </tr>
-      <% end %>
-      </tbody>
-      </table>
-
-<% end %>
+          <tbody>
+            <% @orders_by_product.each do |order| %>
+              <tr>
+                <td class="text-center"> <%= order.myproduct.title %> </td>
+                <td class="text-center"> <%= order.id %> </td>
+                <td class="text-center"> <%= order.quantity %> </td>
+                <td class="text-center"> <%= order.total_price %> </td>
+                <td class="text-center"> <%= order.myproduct.status %> </td>
+              </tr>
+            <% end %>
+          </tbody>
+        <% end %>
+    </table>
+  </div>
 </div>

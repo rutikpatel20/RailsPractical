@@ -1,7 +1,5 @@
 <%= render 'layouts/navbar' %>
-
 <div class="center flex-column" style = "height: auto;">
-
   <h1> MyProducts </h1>
 
   <!--Error Message-->
@@ -32,13 +30,11 @@
             <td class="text-center"> <%= myproduct.price %> </td>
             <td class="text-center"> <%= myproduct.capacity %> </td>
             <td class="text-center"> <%= myproduct.is_active %> </td>
-            <td class="text-center"> <%= myproduct.status %> </td>
-            
+            <td class="text-center"> <%= myproduct.status %> </td>      
             
             <td class="text-center"><%= button_to "Show",myproduct_path(myproduct),method: :get, class:"btn-success border-0 rounded-pill shadow px-3 py-2" %></td>
             <td class="text-center"><%= button_to "Edit",edit_myproduct_path(myproduct),method: :get, class:"btn-primary border-0 rounded-pill shadow px-3 py-2" %></td>
             <td class="text-center"><%= button_to "Delete",myproduct_path(myproduct),method: :delete, class:"btn-danger border-0 rounded-pill shadow px-3 py-2" %></td>
-
           </tr>
         <% end %>
       </ol>

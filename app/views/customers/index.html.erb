@@ -30,7 +30,6 @@
             <td class="text-center"><%= button_to "Show",customer_path(customer),method: :get, class:"btn-success border-0 rounded-pill shadow px-3 py-2" %></td>
             <td class="text-center"><%= button_to "Edit",edit_customer_path(customer),method: :get, class:"btn-primary border-0 rounded-pill shadow px-3 py-2" %></td>
             <td class="text-center"><%= button_to "Delete",customer_path(customer),method: :delete, class:"btn-danger border-0 rounded-pill shadow px-3 py-2" %></td>
-
           </tr>
         <% end %>
       </ol>
@@ -41,7 +40,6 @@
     <%= button_to fa_icon("plus", text: "Add New Customer"), new_customer_path, method: :get ,class:"btn-warning border-0 rounded-pill shadow p-3 m-3" %>
     <%= button_to fa_icon("cube", text: "Product Page"), myproducts_path, method: :get ,class:"btn-warning border-0 rounded-pill shadow p-3 m-3" %>
     <%= button_to fa_icon("shopping-cart", text: "Order Page"), orders_path, method: :get ,class:"btn-warning border-0 rounded-pill shadow p-3 m-3" %>
-  
   </div>
 
 </div>

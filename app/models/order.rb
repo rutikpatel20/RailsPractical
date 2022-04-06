@@ -3,4 +3,3 @@ class Order < ApplicationRecord
   belongs_to :myproduct
   belongs_to :customer
 end
-
