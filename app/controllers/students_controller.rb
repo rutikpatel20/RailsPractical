@@ -8,9 +8,9 @@ class StudentsController < ApplicationController
   end
 
   def create
-    @student = Student.create(params.require(:student).permit(:firstname, :lastname, :phone_number, :email, :birthdate, :department, :terms_of_usage))
+    @student = Student.create(student_params)
     if @student.valid?
-      flash[:notice] = "Student Added Successfully"
+      flash[:errors] = "Student Added Successfully"
       redirect_to students_path
     else
       flash[:errors] = @student.errors.full_messages
@@ -28,8 +28,8 @@ class StudentsController < ApplicationController
 
   def update
     @student = Student.find(params[:id])
-    if @student.update(params.require(:student).permit(:firstname, :lastname, :phone_number, :email, :birthdate, :department, :terms_of_usage))
-      flash[:notice] = "Student Updated Successfully"
+    if @student.update(student_params)
+      flash[:errors] = "Student Updated Successfully"
       redirect_to students_path
     else
       flash[:errors] = @student.errors.full_messages
@@ -40,11 +40,17 @@ class StudentsController < ApplicationController
   def destroy
     @student = Student.find(params[:id])
     if @student.delete
-      flash[:notice] = "Student Deleted Successfully"
+      flash[:errors] = "Student Deleted Successfully"
       redirect_to students_path
     else
       flash[:errors] = @student.errors.full_messages
       redirect_to destroy_student_path
     end
   end
+
+  private
+  def student_params
+    params.require(:student).permit(:firstname, :lastname, :phone_number, :email, :birthdate, :department, :terms_of_usage)
+  end
+
 end
