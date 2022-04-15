@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'categories/index'
+  get 'categories/edit'
+  get 'categories/new'
+  get 'categories/update'
   get 'orders/index'
   get 'orders/new'
   get 'orders/create'
@@ -58,10 +62,48 @@ Rails.application.routes.draw do
   resources :employees
 
 
-  root "myproducts#index"
+  # root "myproducts#index"
   get 'myproducts/defaultScope'
   get 'orders/root'
   resources :myproducts
   resources :customers
   resources :orders
+
+  # Active Record Association
+  root 'events#index'
+  get 'sign_up', to: 'users#new'
+  post 'sign_up', to: 'users#create'
+  get 'sign_in', to: 'sessions#new'
+  post 'sign_in', to: 'sessions#create', as: 'log_in'
+  delete 'logout', to: 'sessions#destroy'
+  
+  # post 'enroll_event', to: "users#enroll_event"
+
+  resources :users do
+    collection do
+      get :userprofile
+    end
+    member do
+      get :enroll_event
+      post :post_user
+      get :unenroll_event
+    end
+  end
+
+  resources :categories
+
+  # Event Routes
+  get '/:event_id/comments/new', to: 'comments#new', :as => :new_comment
+  post '/:event_id/comments/new', to: 'comments#create'
+  get '/events/:event_id/comments/:comment_id/edit', to: 'comments#edit', :as => :edit_comment
+  post '/events/:event_id/comments/:comment_id/edit/', to: 'comments#update'
+  delete '/events/:event_id/comments/:comment_id/', to: 'comments#destroy', :as => :destroy_comment
+
+  resources :events do
+    resources :comments do
+      member do
+        post :like
+      end
+    end
+  end
 end
