@@ -35,7 +35,7 @@
           <tr>
             <td><%= comment.user.username %> </td>
             <td><%= comment.user_comment %> </td>
-            <%# Likes on comment %>
+            <!-- Likes on comment -->
             <td><%= button_to "LIKE", like_event_comment_path(:event_id => @event.id, :comment_id => comment.id),method: :post, class:"btn btn-info border-0 shadow p-2 m-2" %> </td>
             <td class="text-success"><%= comment.like %> Likes </td>
             <% if @current_user.id == comment.user_id %>

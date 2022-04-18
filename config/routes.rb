@@ -77,8 +77,6 @@ Rails.application.routes.draw do
   post 'sign_in', to: 'sessions#create', as: 'log_in'
   delete 'logout', to: 'sessions#destroy'
   
-  # post 'enroll_event', to: "users#enroll_event"
-
   resources :users do
     collection do
       get :userprofile
