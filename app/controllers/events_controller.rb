@@ -54,28 +54,6 @@ class EventsController < ApplicationController
     end
   end
 
-  def add_comments
-    @event = Event.find(params[:event_id]).comments.create("user_comment"=>params[:user_comment], "user_id" => @current_user.id)
-    flash[:errors] = "Comment Added Successfully"
-  end
-
-  def edit_comment
-    @event = Event.find(params[:id])
-  end
-  
-  def update_comment
-    @event = Comment.update("user_comment"=>params[:user_comment], "user_id" => @current_user.id)
-    flash[:errors] = "Comment Updated Successfully"
-    redirect_to event_path(params[:id])  
-  end
-  
-  def destroy_comment
-    @event = Event.find(params[:id])
-    @event = Comment.delete("user_comment"=>params[:user_comment], "user_id" => @current_user.id)
-    flash[:errors] = "Comment Deleted Successfully"
-  end
-  
-
   private
   def event_params
     params.require(:event).permit(:name, :description, :event_date, :user_id, :category_id)
