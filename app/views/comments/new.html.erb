@@ -1,0 +1,16 @@
+<div class="center flex-column" id="vantajs" style="height:100vh;">
+  <h1 class="text-light">Put Your comment</h1>
+  <div class="card bg-light my-3 border-warning shadow" >
+    <div class="card-header">Comments</div>
+    <div class="card-body">
+      <%= form_with model: @comment, url: new_comment_path do |form| %>
+        <div class="form-group">
+          <%= form.label 'New comment' %>
+          <%= form.text_area :user_comment, class: "form-control mb-3" %>
+          <%= form.hidden_field :user_id, value: @current_user.id %>
+        </div>
+        <%= form.submit "Add Comment", class: "btn-success border-0 rounded-pill shadow p-2 mt-1" %>
+      <% end %>
+    </div>
+  </div>
+</div>

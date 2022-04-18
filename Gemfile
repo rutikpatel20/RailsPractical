@@ -28,7 +28,10 @@ gem "stimulus-rails"
 gem "jbuilder"
 
 # Fontawesome Gem
-gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.8'
+gem "font-awesome-rails", "~> 4.7", ">= 4.7.0.8"
+
+# Encryption of passwords is done using bcrypt
+gem "bcrypt", "~> 3.1", ">= 3.1.17"
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
@@ -54,7 +57,7 @@ gem "bootsnap", require: false
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
-  gem 'pry'
+  gem "pry"
 end
 
 group :development do
