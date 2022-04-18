@@ -64,12 +64,9 @@ class EventsController < ApplicationController
   end
   
   def update_comment
-    # @comment = Comment.find(params[:id])
-    # if @current_user.id == Comment.find(params[:id])
     @event = Comment.update("user_comment"=>params[:user_comment], "user_id" => @current_user.id)
     flash[:errors] = "Comment Updated Successfully"
-    redirect_to event_path(params[:id])
-    # end    
+    redirect_to event_path(params[:id])  
   end
   
   def destroy_comment

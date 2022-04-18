@@ -5,8 +5,7 @@ class UsersController < ApplicationController
   end
   
   def create
-    @user = User.new(user_params)
-    # @user.build_address    
+    @user = User.new(user_params)   
     if @user.save
       # stores saved user id in a session
       session[:user_id] = @user.id
@@ -43,7 +42,6 @@ class UsersController < ApplicationController
   def userprofile
     @user = @current_user
     @events = Event.all
-    # @enroll_events = @user.enrollments.all
   end
 
   private
