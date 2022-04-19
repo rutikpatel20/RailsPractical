@@ -1,0 +1,26 @@
+<div class="center flex-column" id="vantajs" style="height:100vh;">
+  <div class="card bg-light border-warning shadow" style="width: 22rem;">
+    <div class="card-body">
+      <div class="card-header">
+        <h2 class="text-center">Order Form</h2>
+      </div>
+      <!--Error Message-->
+      <% if flash[:errors] %>
+        <% flash[:errors].each do |error| %>
+          <p class="text-danger"><%= error %></p>
+        <% end %>
+      <% end %>
+      <!-- Form Started Here -->
+      <%= form_with(model: [@rproduct, @rorder]) do |ro| %>
+        <h4 class="mt-3"> &#10145; Product Name: <%= @rproduct.title %> </h4>
+        <h4> &#10145; Product Price: <%= @rproduct.price %> </h4>
+        <%= ro.hidden_field :rproduct_id, class:"mb-2 form-control" %>
+        <br>
+        <%= ro.label :quantity, "Quantity :", class:"mt-2" %>
+        <%= ro.number_field :quantity ,placeholder: "Enter Order's Quantity",class:"mb-2 form-control" %>
+        <br>
+        <%= ro.submit class:"btn-primary border-0 rounded-pill shadow p-3" %>
+      <% end %>
+    </div>
+  </div>
+</div>

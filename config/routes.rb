@@ -1,36 +1,4 @@
 Rails.application.routes.draw do
-  get 'categories/index'
-  get 'categories/edit'
-  get 'categories/new'
-  get 'categories/update'
-  get 'orders/index'
-  get 'orders/new'
-  get 'orders/create'
-  get 'orders/show'
-  get 'orders/edit'
-  get 'orders/update'
-  get 'orders/destroy'
-  get 'customers/index'
-  get 'customers/new'
-  get 'customers/create'
-  get 'customers/show'
-  get 'customers/edit'
-  get 'customers/update'
-  get 'customers/destroy'
-  get 'myproducts/index'
-  get 'myproducts/new'
-  get 'myproducts/create'
-  get 'myproducts/show'
-  get 'myproducts/edit'
-  get 'myproducts/update'
-  get 'myproducts/destroy'
-  get 'employees/index'
-  get 'employees/new'
-  get 'employees/create'
-  get 'employees/show'
-  get 'employees/edit'
-  get 'employees/update'
-  get 'employees/destroy'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
@@ -56,27 +24,26 @@ Rails.application.routes.draw do
 
   #for Employees
   # root "employees#index"
-  post '/increaseOrder', to: "employees#increaseOrder"
-  post '/decreaseOrder', to: "employees#decreaseOrder"
-  get 'employees/task'
+  post "/increaseOrder", to: "employees#increaseOrder"
+  post "/decreaseOrder", to: "employees#decreaseOrder"
+  get "employees/task"
   resources :employees
 
-
   # root "myproducts#index"
-  get 'myproducts/defaultScope'
-  get 'orders/root'
+  get "myproducts/defaultScope"
+  get "orders/root"
   resources :myproducts
   resources :customers
   resources :orders
 
   # Active Record Association
-  root 'events#index'
-  get 'sign_up', to: 'users#new'
-  post 'sign_up', to: 'users#create'
-  get 'sign_in', to: 'sessions#new'
-  post 'sign_in', to: 'sessions#create', as: 'log_in'
-  delete 'logout', to: 'sessions#destroy'
-  
+  # root "events#index"
+  get "sign_up", to: "users#new"
+  post "sign_up", to: "users#create"
+  get "sign_in", to: "sessions#new"
+  post "sign_in", to: "sessions#create", as: "log_in"
+  delete "logout", to: "sessions#destroy"
+
   resources :users do
     collection do
       get :userprofile
@@ -91,11 +58,11 @@ Rails.application.routes.draw do
   resources :categories
 
   # Event Routes
-  get '/:event_id/comments/new', to: 'comments#new', :as => :new_comment
-  post '/:event_id/comments/new', to: 'comments#create'
-  get '/events/:event_id/comments/:comment_id/edit', to: 'comments#edit', :as => :edit_comment
-  post '/events/:event_id/comments/:comment_id/edit/', to: 'comments#update'
-  delete '/events/:event_id/comments/:comment_id/', to: 'comments#destroy', :as => :destroy_comment
+  get "/:event_id/comments/new", to: "comments#new", :as => :new_comment
+  post "/:event_id/comments/new", to: "comments#create"
+  get "/events/:event_id/comments/:comment_id/edit", to: "comments#edit", :as => :edit_comment
+  post "/events/:event_id/comments/:comment_id/edit/", to: "comments#update"
+  delete "/events/:event_id/comments/:comment_id/", to: "comments#destroy", :as => :destroy_comment
 
   resources :events do
     resources :comments do
@@ -104,4 +71,22 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  # Resourceful Routes for rproducts
+  resources :rproducts do
+    resources :rorders
+  end
+
+  # Namespace Routing
+  namespace :business do
+    get "search", to: "rcustomers#search_customer"
+    resources :rcustomers, only: [:index, :new, :create, :edit, :update] do
+      member do
+        get "name_preview"
+        delete "delete_customer"
+      end
+    end
+  end
+
+  root "rproducts#index"
 end

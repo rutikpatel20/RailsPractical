@@ -1,0 +1,69 @@
+<div class="center flex-column" id="vantajs" style="height:100vh;">
+  <h1> Order </h1>
+  <!--Error Message-->
+  <% if flash[:errors] %>
+    <% flash.each do |name,message| %>
+      <p class="text-danger"><%= message%></p>
+    <% end %>
+  <% end %>
+  <div>
+    <table class="table table-info table-striped">
+      <ol class="fs-2">
+        <thead class="table-secondary">
+          <td class="text-center"> Order ID </td>
+          <td class="text-center"> Quantity </td>
+          <td class="text-center"> Total Price </td>
+          <td colspan=3 class="text-center"> Action </td>
+        </thead>
+        <% @orders.each do |order| %>
+          <tr>
+            <td class="text-center"> <%= order.id %> </td>
+            <td class="text-center"> <%= order.quantity %> </td>
+            <td class="text-center"> <%= order.total_price %> </td>
+            <td class="text-center"><%= button_to "Show",order_path(order),method: :get, class:"btn-success border-0 rounded-pill shadow px-3 py-2" %></td>
+            <td class="text-center"><%= button_to "Edit",edit_order_path(order),method: :get, class:"btn-primary border-0 rounded-pill shadow px-3 py-2" %></td>
+            <td class="text-center"><%= button_to "Delete",order_path(order),method: :delete, class:"btn-danger border-0 rounded-pill shadow px-3 py-2" %></td>
+          </tr>
+        <% end %>
+      </ol>
+    </table>
+  </div>
+  <div class="d-flex">
+    <%= button_to fa_icon("plus", text: "Book Order"), new_order_path, method: :get ,class:"btn-warning border-0 rounded-pill shadow p-3 m-3" %>
+    <%= button_to fa_icon("handshake-o", text: "Customer Page"), myproducts_path, method: :get ,class:"btn-success border-0 rounded-pill shadow p-3 m-3" %>
+    <%= button_to fa_icon("cube", text: "Product Page"), myproducts_path, method: :get ,class:"btn-info border-0 rounded-pill shadow p-3 m-3" %>
+    <%= button_to fa_icon("tree", text: "Root Page"), orders_root_path, method: :get ,class:"btn-danger border-0 rounded-pill shadow p-3 m-3" %>
+  </div>
+  <!-- Error Message for record not found -->
+  <% if flash[:notice] %>
+    <% flash.each do |name,message| %>
+      <p class="text-danger"><%= message%></p>
+    <% end %>
+  <% end %>
+  <!-- Table for search by Product name -->
+  <div>
+    <table class="table table-info table-striped">
+      <% if !(params[:searchParams].blank?) %>
+        <ol class="fs-2">
+          <thead class="table-secondary">
+            <td class="text-center"> Product Name </td>
+            <td class="text-center"> Order ID </td>
+            <td class="text-center"> Quantity </td>
+            <td class="text-center"> Total Price </td>
+            <td class="text-center"> Status </td>
+          </thead>
+          <tbody>
+            <% @orders_by_product.each do |order| %>
+              <tr>
+                <td class="text-center"> <%= order.myproduct.title %> </td>
+                <td class="text-center"> <%= order.id %> </td>
+                <td class="text-center"> <%= order.quantity %> </td>
+                <td class="text-center"> <%= order.total_price %> </td>
+                <td class="text-center"> <%= order.myproduct.status %> </td>
+              </tr>
+            <% end %>
+          </tbody>
+        <% end %>
+      </table>
+    </div>
+  </div>

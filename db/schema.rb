@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_15_094340) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_19_111834) do
   create_table "addresses", force: :cascade do |t|
     t.string "user_address"
     t.integer "user_id"
@@ -151,6 +151,31 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_15_094340) do
     t.string "name"
     t.decimal "price"
     t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "rcustomers", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.integer "phone_number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "rorders", force: :cascade do |t|
+    t.integer "quantity"
+    t.integer "total_price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "rproduct_id"
+    t.index ["rproduct_id"], name: "index_rorders_on_rproduct_id"
+  end
+
+  create_table "rproducts", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.integer "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
