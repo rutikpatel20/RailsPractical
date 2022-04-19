@@ -55,7 +55,6 @@ class Business::RcustomersController < ApplicationController
     else
       parameter = params[:searchParams].downcase
       @rcustomers = Rcustomer.where("lower(name) LIKE ? ", parameter)
-
       flash[:errors] = "Customer Searched Successfully"
     end
   end
