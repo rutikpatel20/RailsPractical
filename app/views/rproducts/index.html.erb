@@ -1,0 +1,39 @@
+<%= render 'layouts/navbar'%>
+<div class="center flex-column" id="vantajs" style="height:100vh;">
+  <h1> MyProducts </h1>
+  <!--Error Message-->
+  <% if flash[:errors] %>
+    <% flash.each do |name,message| %>
+      <p class="text-danger"><%= message%></p>
+    <% end %>
+  <% end %>
+  <!-- Product Table -->
+  <div>
+    <table class="table table-info table-striped">
+      <ol class="fs-2">
+        <thead class="table-secondary">
+          <td class="text-center"> Title </td>
+          <td class="text-center"> Description </td>
+          <td class="text-center"> Price </td>
+          <td colspan=3 class="text-center"> Action </td>
+          <td colspan=2 class="text-center"> Order </td>
+        </thead>
+        <% @rproducts.each do |rproduct| %>
+          <tr>
+            <td class="text-center"> <%= link_to rproduct.title, rproduct_path(rproduct) %> </td>
+            <td class="text-center"> <%= rproduct.description %> </td>
+            <td class="text-center"> <%= rproduct.price %> </td>
+            <td class="text-center"><%= button_to "Show",rproduct_path(rproduct),method: :get, class:"btn-success border-0 rounded-pill shadow px-3 py-2" %></td>
+            <td class="text-center"><%= button_to "Edit",edit_rproduct_path(rproduct),method: :get, class:"btn-primary border-0 rounded-pill shadow px-3 py-2" %></td>
+            <td class="text-center"><%= button_to "Delete",rproduct_path(rproduct),method: :delete, class:"btn-danger border-0 rounded-pill shadow px-3 py-2" %></td>
+            <td class="text-center"><%= button_to fa_icon("shopping-cart", text: "Book"), new_rproduct_rorder_path(rproduct), method: :get ,class:"btn-warning border-0 rounded-pill shadow px-3 py-2" %></td>
+          </tr>
+        <% end %>
+      </ol>
+    </table>
+  </div>
+  <div class="d-flex">
+    <%= button_to fa_icon("plus", text: "Add New Product"), new_rproduct_path, method: :get ,class:"btn-warning border-0 rounded-pill shadow p-3 m-3" %>
+    <%= button_to fa_icon("handshake-o", text: "Customer Page"), business_rcustomers_path, method: :get ,class:"btn-info border-0 rounded-pill shadow p-3 m-3" %>
+  </div>
+</div>

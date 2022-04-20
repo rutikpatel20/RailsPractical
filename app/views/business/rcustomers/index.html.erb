@@ -1,0 +1,46 @@
+<%= render 'layouts/navbar'%>
+<div class="center flex-column" id="vantajs" style="height:100vh;">
+  <h1> Customers </h1>
+  <!--Error Message-->
+  <% if flash[:errors] %>
+    <% flash.each do |name,message| %>
+      <p class="text-danger"><%= message%></p>
+    <% end %>
+  <% end %>
+  <!-- Search bar for Searching Customer -->
+  <div class="mb-3">
+    <%= form_tag business_search_path, :method => "get" do %>
+      <div class="d-flex">
+        <%= text_field_tag :searchParams, params[:searchParams], placeholder: "Search Customer", class: "form-control me-2" %>
+        <%= submit_tag "Search", class: "btn btn-success me-2" %>
+      </div>
+    <% end %>
+  </div>
+  <!-- Customer Table -->
+  <div>
+    <table class="table table-info table-striped">
+      <ol class="fs-2">
+        <thead class="table-secondary">
+          <td class="text-center"> Name </td>
+          <td class="text-center"> Email </td>
+          <td class="text-center"> Phone  </td>
+          <td colspan=3 class="text-center"> Action </td>
+        </thead>
+        <% @rcustomers.each do |rcustomer| %>
+          <tr>
+            <td class="text-center"> <%= rcustomer.name %> </td>
+            <td class="text-center"> <%= rcustomer.email %> </td>
+            <td class="text-center"> <%= rcustomer.phone_number %> </td>
+            <td class="text-center"><%= button_to "Show",name_preview_business_rcustomer_path(rcustomer),method: :get, class:"btn-success border-0 rounded-pill shadow px-3 py-2" %></td>
+            <td class="text-center"><%= button_to "Edit",edit_business_rcustomer_path(rcustomer),method: :get, class:"btn-primary border-0 rounded-pill shadow px-3 py-2" %></td>
+            <td class="text-center"><%= button_to "Delete",delete_customer_business_rcustomer_path(rcustomer),method: :delete, class:"btn-danger border-0 rounded-pill shadow px-3 py-2" %></td>
+          </tr>
+        <% end %>
+      </ol>
+    </table>
+  </div>
+  <div class="d-flex">
+    <%= button_to fa_icon("plus", text: "Add New Customer"), new_business_rcustomer_path, method: :get ,class:"btn-warning border-0 rounded-pill shadow p-3 m-3" %>
+    <%= button_to fa_icon("cube", text: "Product Page"), rproducts_path, method: :get ,class:"btn-warning border-0 rounded-pill shadow p-3 m-3" %>
+  </div>
+</div>

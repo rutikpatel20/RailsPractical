@@ -1,0 +1,27 @@
+<div class="center flex-column" id="vantajs" style="height:100vh;">
+  <div class="card bg-light border-warning shadow" >
+    <div class="card-body">
+      <div class="card-header">
+        <h2 class="text-center">Search Result</h2>
+      </div>
+      <!--Error Message-->
+      <% if flash[:errors] %>
+        <% flash.each do |name,message| %>
+          <p class="text-danger"><%= message%></p>
+        <% end %>
+      <% end %>
+      <% @rcustomers.each do |rcustomer|%>
+        <div>
+          <h2> &#10145; Name: <%= rcustomer.name %> </h2>
+          <h2> &#10145; Email: <%= rcustomer.email %> </h2>
+          <h2> &#10145; Phone Number: <%= rcustomer.phone_number %> </h2>
+        </div>
+        <div class="d-flex">
+          <%= button_to "Edit Customer" , edit_business_rcustomer_path(rcustomer), method: :get ,class:"btn-success border-0 rounded-pill shadow p-2 m-2" %>
+          <%= button_to "Delete Customer", delete_customer_business_rcustomer_path(rcustomer), method: :delete ,class:"btn-danger border-0 rounded-pill shadow p-2 m-2" %>
+          <%= button_to "View all Customers", business_rcustomers_path, method: :get ,class:"btn-primary border-0 rounded-pill shadow p-2 m-2" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
