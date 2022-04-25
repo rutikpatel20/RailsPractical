@@ -1,0 +1,41 @@
+<div class="center flex-column" id="vantajsnet" style="height:100vh;">
+  <p class="notice text-light"><%= notice %></p>
+  <p class="alert text-light"><%= alert %></p>
+  <div class="card mb-3 p-3 shadow" style="max-width: 540px;">
+    <div class="row no-gutters">
+      <div class="col-md-4">
+        <% if signed_in? %>
+          <% if current_user1.role == "admin" %>
+            <%= image_tag "admin.png", class:"card-img" %>
+          <% end %>
+          <% if current_user1.role == "merchant" %>
+            <%= image_tag "merchant.png", class:"card-img" %>
+          <% end %>
+        <% end %>
+        <% if !signed_in? %>
+          <%= image_tag "guest.png", class:"card-img" %>
+        <% end %>
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <% if signed_in? %>
+            <h3 class="card-title">Welcome, <%= current_user1.role%></h3>
+            <p class="card-text">This card shows your brief introduction</p>
+            <p class="card-text">Your Email-ID is :- <strong> <%= current_user1.email %> </strong> </p>
+            <div class="d-flex">
+              <%= button_to fa_icon("cube", text: "Product Page"), product1s_path, method: :get ,class:"btn-warning border-0 rounded-pill shadow px-3 py-2 m-2" %>
+              <%= button_to "Log out", destroy_user1_session_path, method: :delete, data: { turbo: "false" }, class:"btn-danger border-0 rounded-pill shadow px-3 py-2 my-2" %>
+            </div>
+          <% else %>
+            <h3 class="card-title">Welcome, Guest</h3>
+            <p class="card-text">Please Login or Register to continue!!!</p>
+            <div class="d-flex">
+              <%= link_to "Log in", new_user1_session_path, class:"btn-success border-0 rounded-pill shadow px-3 py-2 m-2 text-decoration-none" %>
+              <%= link_to "Register", new_user1_registration_path, class:"btn-primary border-0 rounded-pill shadow px-3 py-2 my-2 text-decoration-none" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

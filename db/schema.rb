@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_19_111834) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_25_045117) do
   create_table "addresses", force: :cascade do |t|
     t.string "user_address"
     t.integer "user_id"
@@ -135,6 +135,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_19_111834) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "order1s", force: :cascade do |t|
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "product1_id"
+    t.index ["product1_id"], name: "index_order1s_on_product1_id"
+  end
+
   create_table "orders", force: :cascade do |t|
     t.integer "quantity"
     t.integer "total_price"
@@ -145,6 +153,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_19_111834) do
     t.integer "myproduct_id"
     t.index ["customer_id"], name: "index_orders_on_customer_id"
     t.index ["myproduct_id"], name: "index_orders_on_myproduct_id"
+  end
+
+  create_table "product1s", force: :cascade do |t|
+    t.string "name"
+    t.integer "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "products", force: :cascade do |t|
@@ -190,6 +205,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_19_111834) do
     t.boolean "terms_of_usage"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "user1s", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "role"
+    t.index ["email"], name: "index_user1s_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_user1s_on_reset_password_token", unique: true
   end
 
   create_table "users", force: :cascade do |t|

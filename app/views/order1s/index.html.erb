@@ -1,0 +1,31 @@
+<div class="center flex-column" id="vantajsnet" style="height:100vh;">
+  <h1> Order </h1>
+  <!--Error Message-->
+  <% if flash[:errors] %>
+    <% flash.each do |name,message| %>
+      <p class="text-danger"><%= message%></p>
+    <% end %>
+  <% end %>
+  <div>
+    <table class="table table-info table-striped">
+      <ol class="fs-2">
+        <thead class="table-secondary">
+          <td class="text-center"> Order ID </td>
+          <td class="text-center"> Quantity </td>
+          <td colspan=3 class="text-center"> Action </td>
+        </thead>
+        <% @order1s.each do |order1| %>
+          <tr>
+            <td class="text-center"> <%= order1.id %> </td>
+            <td class="text-center"> <%= order1.quantity %> </td>
+            <td class="text-center"><%= button_to "Edit",edit_product1_order1_path(order1, :product1_id),method: :get, class:"btn-primary border1-0 rounded-pill shadow px-3 py-2" %></td>
+            <td class="text-center"><%= button_to "Delete",product1_order1_path(order1, :product_id),method: :delete, class:"btn-danger border1-0 rounded-pill shadow px-3 py-2" %></td>
+          </tr>
+        <% end %>
+      </ol>
+    </table>
+  </div>
+  <div class="d-flex">
+    <%= button_to fa_icon("cube", text: "Product Page"), product1s_path, method: :get ,class:"btn-info border-0 rounded-pill shadow p-3 m-3" %>
+  </div>
+</div>

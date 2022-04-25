@@ -14,8 +14,12 @@
     <!-- FontAwesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Vanta JS For Animated Background -->
+    <!-- Waves Background -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r119/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.21/vanta.waves.min.js"></script>
+    <!-- Net Background -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r119/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.21/vanta.net.min.js"></script>
   </head>
   <body>
     <%= yield %>
@@ -23,6 +27,16 @@
   <script>
     VANTA.WAVES({
       el: "#vantajs",
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200.00,
+      minWidth: 200.00,
+      scale: 1.00,
+      scaleMobile: 1.00
+    })
+    VANTA.NET({
+      el: "#vantajsnet",
       mouseControls: true,
       touchControls: true,
       gyroControls: false,
