@@ -1,17 +1,14 @@
 class Order1sController < ApplicationController
   def index
     @order1s = Order1.all
-    # @order1s = @product1.order1s
   end
 
   def new
     @product1 = Product1.find(params[:product1_id])
     @order1 = Order1.new
-    # @order1 = @product1.order1s.build
   end
 
   def create
-    # @order1 = @product1.order1s.build(order1_params)
     @product1 = Product1.find(params[:product1_id])
     @order1 = @product1.order1s.new(order1_params)
     if @order1.save
@@ -36,7 +33,7 @@ class Order1sController < ApplicationController
     @order1 = Order1.find(params[:id])
     @product1 = Product1.find(params[:product1_id])
     if @order1.update(order1_params)
-      flash[:notice] = "Order Updated Successfully"
+      flash[:errors] = "Order Updated Successfully"
       redirect_to product1_path(@product1)
     else
       render :edit

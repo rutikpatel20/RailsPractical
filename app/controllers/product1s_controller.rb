@@ -10,7 +10,7 @@ class Product1sController < ApplicationController
   def create
     @product1 = Product1.new(product1_params)
     if @product1.save
-      flash[:notice] = "Product Created successfully"
+      flash[:errors] = "Product Created successfully"
       redirect_to product1s_path
     else
       flash[:errors] = @product1.errors.full_messages
@@ -30,7 +30,7 @@ class Product1sController < ApplicationController
   def update
     @product1 = Product1.find(params[:id])
     if @product1 = Product1.update(product1_params)
-      flash[:notice] = "Product Updated successfully"
+      flash[:errors] = "Product Updated successfully"
       redirect_to product1s_path
     else
       flash[:errors] = @product1.errors.full_messages
@@ -40,8 +40,10 @@ class Product1sController < ApplicationController
 
   def destroy
     @product1 = Product1.find(params[:id])
-    @product1.destroy
-    redirect_to product1s_path
+    if @product1.destroy
+      flash[:errors] = "Product Deleted Successfully"
+      redirect_to product1s_path
+    end
   end
 
   private
