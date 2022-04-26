@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_25_045117) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_25_124648) do
+  create_table "address1s", force: :cascade do |t|
+    t.string "house_name"
+    t.string "street_name"
+    t.string "road"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "employee1_id"
+    t.index ["employee1_id"], name: "index_address1s_on_employee1_id"
+  end
+
   create_table "addresses", force: :cascade do |t|
     t.string "user_address"
     t.integer "user_id"
@@ -66,6 +76,20 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_25_045117) do
     t.string "lname"
     t.string "email"
     t.integer "phone_number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "employee1s", force: :cascade do |t|
+    t.string "employee_name"
+    t.string "email"
+    t.string "password"
+    t.string "gender"
+    t.string "hobbies"
+    t.string "address"
+    t.integer "mobile_number"
+    t.date "birth_date"
+    t.string "document"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

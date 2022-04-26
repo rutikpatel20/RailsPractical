@@ -1,0 +1,34 @@
+<!-- Employee Details Showing -->
+<div class="center flex-column" id="vantajs" style="height:100vh;">
+  <!--Error Message-->
+  <% if flash[:errors] %>
+    <% flash.each do |name,message| %>
+      <p class="text-danger"><%= message%></p>
+    <% end %>
+  <% end %>
+  <div class="d-flex">
+    <div class="m-5" >
+      <div class="card bg-light border-warning shadow">
+        <div class="card-body">
+          <div class="card-header">
+            <h2 class="text-center">Employee's Details</h2>
+          </div>
+          <div>
+            <h2> &#10145; ID: <%= @employee1.id %> </h2>
+            <h2> &#10145; Name: <%= @employee1.employee_name %> </h2>
+            <h2> &#10145; Email: <%= @employee1.email %> </h2>
+            <h2> &#10145; Gender: <%= @employee1.gender %> </h2>
+            <h2> &#10145; Hobbies: <%= @employee1.hobbies %> </h2>
+            <h2> &#10145; Mobile Number: <%= @employee1.mobile_number %> </h2>
+            <h2> &#10145; Birthdate: <%= @employee1.birth_date %> </h2>
+          </div>
+          <div class="d-flex">
+            <%= button_to "Edit Employee" , edit_employee1_path, method: :get ,class:"btn-success border-0 rounded-pill shadow p-2 m-2" %>
+            <%= button_to "Delete Employee", employee1s_path, method: :delete ,class:"btn-danger border-0 rounded-pill shadow p-2 m-2" %>
+            <%= button_to "View all Employee", employee1s_path,method: :get ,class:"btn-primary border-0 rounded-pill shadow p-2 m-2" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

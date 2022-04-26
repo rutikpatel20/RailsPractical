@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get "employee1s/index"
+  get "employee1s/edit"
+  get "employee1s/new"
+  get "employee1s/show"
   devise_for :user1s
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -97,5 +101,11 @@ Rails.application.routes.draw do
     resources :order1s
   end
 
-  root "home1s#index"
+  # root "home1s#index"
+
+  # Action View form helpers
+  get "search", to: "employee1s#search"
+  resources :employee1s
+
+  root "employee1s#index"
 end
