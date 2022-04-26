@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :user1s
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
@@ -88,5 +89,13 @@ Rails.application.routes.draw do
     end
   end
 
-  root "rproducts#index"
+  # root "rproducts#index"
+
+  # Layouts Rendering Practical
+  resources :user1s
+  resources :product1s do
+    resources :order1s
+  end
+
+  root "home1s#index"
 end
