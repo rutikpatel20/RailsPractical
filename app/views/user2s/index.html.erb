@@ -1,0 +1,35 @@
+<div class="center flex-column" id="vantajsnet">
+  <h1 class="text-light"> Users </h1>
+  <!--Error Message-->
+  <% if flash[:errors] %>
+    <% flash.each do |name,message| %>
+      <p class="text-danger"><%= message%></p>
+    <% end %>
+  <% end %>
+  <!-- User Table -->
+  <div>
+    <table class="table table-info table-striped">
+      <ol class="fs-2">
+        <thead class="table-secondary">
+          <td class="text-center"> Image </td>
+          <td class="text-center"> Name </td>
+          <td class="text-center"> Email </td>
+          <td colspan=3 class="text-center"> Action </td>
+        </thead>
+        <% @user2s.each do |u| %>
+          <tr>
+            <td class="text-center"> <%= image_tag u.picture.url,alt: "Image not available", style:"width:100px" %> </td>
+            <td class="text-center"> <%= link_to u.name, user2_path(u) %> </td>
+            <td class="text-center"> <%= u.email %> </td>
+            <td class="text-center"><%= button_to "Show",user2_path(u),method: :get, class:"btn-success border-0 rounded-pill shadow px-3 py-2" %></td>
+            <td class="text-center"><%= button_to "Edit",edit_user2_path(u),method: :get, class:"btn-primary border-0 rounded-pill shadow px-3 py-2" %></td>
+            <td class="text-center"><%= button_to "Delete",user2_path(u),method: :delete, class:"btn-danger border-0 rounded-pill shadow px-3 py-2" %></td>
+          </tr>
+        <% end %>
+      </ol>
+    </table>
+  </div>
+  <div class="d-flex">
+    <%= button_to fa_icon("plus", text: "Add New User"), new_user2_path, method: :get ,class:"btn-warning border-0 rounded-pill shadow p-3 m-3" %>
+  </div>
+</div>
