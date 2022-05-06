@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_25_124648) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_06_103427) do
   create_table "address1s", force: :cascade do |t|
     t.string "house_name"
     t.string "street_name"
@@ -27,6 +27,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_25_124648) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_addresses_on_user_id"
+  end
+
+  create_table "articles", force: :cascade do |t|
+    t.string "title"
+    t.string "body"
+    t.date "release_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "authors", force: :cascade do |t|
@@ -186,6 +194,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_25_124648) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "product2s", force: :cascade do |t|
+    t.string "product_name"
+    t.integer "price"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user1_id"
+    t.index ["user1_id"], name: "index_product2s_on_user1_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.decimal "price"
@@ -242,6 +260,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_25_124648) do
     t.integer "role"
     t.index ["email"], name: "index_user1s_on_email", unique: true
     t.index ["reset_password_token"], name: "index_user1s_on_reset_password_token", unique: true
+  end
+
+  create_table "user2s", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "picture"
+    t.string "resume"
   end
 
   create_table "users", force: :cascade do |t|

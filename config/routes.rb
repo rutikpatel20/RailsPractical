@@ -107,5 +107,9 @@ Rails.application.routes.draw do
   get "search", to: "employee1s#search"
   resources :employee1s
 
-  root "employee1s#index"
+  # root "employee1s#index"
+
+  # Test Cases Practical
+  resources :product2s
+  root "home1s#index"
 end
