@@ -1,0 +1,31 @@
+<div class="center flex-column" id="vantajsnet">
+  <div class="card shadow" style="width: 36rem;">
+    <div class="card-header">
+      <h2 class="text-center mt-2">User Form</h2>
+    </div>
+    <div class="card-body">
+      <!--Error Message-->
+      <% if flash[:errors] %>
+        <% flash[:errors].each do |error| %>
+          <p class="text-danger"><%= error %></p>
+        <% end %>
+      <% end %>
+      <!-- Form Started Here -->
+      <%= form_with model: @user2 do |f| %>
+        <%= f.label :name, "Name :", class:"mt-3" %>
+        <%= f.text_field :name ,placeholder: "Enter Your Name",class:"mb-2 form-control" %>
+        <br>
+        <%= f.label :email, "E-mail ID :" %>
+        <%= f.email_field :email ,placeholder: "Enter Your E-mail ID",class:"mb-2 form-control" %>
+        <br>
+        <%= f.label :picture, "Choose Picture :" %>
+        <%= f.file_field :picture, class:"mb-2 form-control" %>
+        <br>
+        <%= f.label :resume, "Upload Resume:" %>
+        <%= f.file_field :resume, class:"mb-2 form-control" %>
+        <br>
+        <%= f.submit "Save User", class:"btn-primary border-0 rounded-pill shadow p-3" %>
+      <% end %>
+    </div>
+  </div>
+</div>

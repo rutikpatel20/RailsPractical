@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get "user2s/index"
+  get "user2s/edit"
+  get "user2s/new"
+  get "user2s/show"
   get "employee1s/index"
   get "employee1s/edit"
   get "employee1s/new"
@@ -107,5 +111,10 @@ Rails.application.routes.draw do
   get "search", to: "employee1s#search"
   resources :employee1s
 
-  root "employee1s#index"
+  # root "employee1s#index"
+
+  # Action mailer and basic file upload
+  resources :user2s
+
+  root "user2s#index"
 end
