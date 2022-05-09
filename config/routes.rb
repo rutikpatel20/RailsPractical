@@ -115,6 +115,10 @@ Rails.application.routes.draw do
 
   # Action mailer and basic file upload
   resources :user2s
+  #root "user2s#index"
 
-  root "user2s#index"
+  # Test Cases Practical
+  resources :product2s
+  root "home1s#index"
+
 end

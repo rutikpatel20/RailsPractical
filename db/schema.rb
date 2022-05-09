@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_28_100407) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_06_103427) do
+
   create_table "address1s", force: :cascade do |t|
     t.string "house_name"
     t.string "street_name"
@@ -27,6 +28,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_28_100407) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_addresses_on_user_id"
+  end
+
+  create_table "articles", force: :cascade do |t|
+    t.string "title"
+    t.string "body"
+    t.date "release_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "authors", force: :cascade do |t|
@@ -184,6 +193,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_28_100407) do
     t.integer "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "product2s", force: :cascade do |t|
+    t.string "product_name"
+    t.integer "price"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user1_id"
+    t.index ["user1_id"], name: "index_product2s_on_user1_id"
   end
 
   create_table "products", force: :cascade do |t|
