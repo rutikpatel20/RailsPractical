@@ -1,0 +1,23 @@
+<h1>Hello, This is mail for creating user</h1>
+<h3>
+  A new <%= @myobject.class.to_s %> has been created.
+</h3>
+<!-- User Details Showing -->
+<div>
+  <div class="d-flex">
+    <div class="mx-5" >
+      <div class="showcard">
+        <div class="card text-dark bg-light" style="width: 20rem; border-radius: 2em;">
+          <div class="card-header text-center mb-3">
+            Welcome To The Team
+          </div>
+          <%= image_tag attachments['filename.jpg'].url,alt: "Image not available", class:"card-img img-resposive", style:"width: 65%; border-radius: 15%;margin: 0 auto; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);" %>
+          <div class="card-body">
+            <h5 class="card-title text-center", style="font-weight: 700;font-size: 1.5em;"><%= @myobject.name %></h5>
+            <p class="card-text text-center"><%= @myobject.email %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
