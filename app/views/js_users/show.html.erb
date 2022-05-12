@@ -1,0 +1,29 @@
+<!-- Event Details Showing -->
+<div class="center flex-column" id="vantajs" style="height:100vh;">
+  <!--Error Message-->
+  <% if flash[:errors] %>
+    <% flash.each do |name, message| %>
+      <p class="text-danger"><%= message %></p>
+    <% end %>
+  <% end %>
+  <p class="text-success"><%= notice %></p>
+  <div class="d-flex">
+    <div class="card border-warning shadow" >
+      <div class="card-body">
+        <div class="card-header">
+          <h2 class="text-center">User Details</h2>
+        </div>
+        <h2> &#10145; First Name : <%= @js_user.first_name %> </h2>
+        <h2> &#10145; Last Name : <%= @js_user.last_name %> </h2>
+        <h2> &#10145; Password : <%= @js_user.password %> </h2>
+        <h2> &#10145; Email : <%= @js_user.email %> </h2>
+        <h2> &#10145; Subscription Mail : <%= @js_user.subscription_email %> </h2>
+      </div>
+      <div class="d-flex">
+        <%= button_to "Edit User" , profile_js_user_path, method: :get ,class:"btn-success border-0 rounded-pill shadow p-2 m-2" %>
+        <%= button_to "Delete User", js_user_path, method: :delete ,class:"btn-danger border-0 rounded-pill shadow p-2 m-2" %>
+        <%= button_to "View all User", js_users_path,method: :get ,class:"btn-primary border-0 rounded-pill shadow p-2 m-2" %>
+      </div>
+    </div>
+  </div>
+</div>

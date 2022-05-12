@@ -17,8 +17,20 @@ Rails.application.routes.draw do
 
   #for Faculties
   resources :faculties
-  root 'faculties#index'
+  # root "faculties#index"
 
   #for Students
   resources :students
+
+  # JavaScript with rails
+  resources :js_users do
+    member do
+      get :profile
+      patch :profile_update
+      get :changepassword
+      patch :changepassword_update
+    end
+  end
+
+  root "js_users#index"
 end

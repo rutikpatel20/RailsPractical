@@ -1,0 +1,22 @@
+<% if flash[:errors] %>
+  <ul>
+    <% flash[:errors].each do |error| %>
+      <li style="color:red;"><%= error %></li>
+    <% end %>
+  </ul>
+<% end %>
+      <li style="color:green;"><%= notice %></li>
+<div class="d-flex">
+  <div class="card border-warning shadow" >
+    <div class="card-body">
+      <div class="card-header">
+        <h3 class="text-center">User Details</h3>
+      </div>
+      <p> &#10145; First Name : <%= @js_user.first_name %> </p>
+      <p> &#10145; Last Name : <%= @js_user.last_name %> </p>
+      <p> &#10145; Password : <%= @js_user.password %> </p>
+      <p> &#10145; Email : <%= @js_user.email %> </p>
+      <p> &#10145; Subscription Mail : <%= @js_user.subscription_email %> </p>
+    </div>
+  </div>
+</div>
