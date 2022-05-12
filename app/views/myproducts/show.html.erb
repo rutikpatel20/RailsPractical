@@ -1,0 +1,29 @@
+<%= render 'layouts/navbar' %>
+<!-- Product Details Showing -->
+<div class="center flex-column">
+  <h1>Product Details</h1>
+
+  <!--Error Message-->
+  <% if flash[:errors] %>
+    <% flash.each do |name,message| %>
+      <p class="text-danger"><%= message%></p>
+    <% end %>
+  <% end %>
+
+  <div>
+    <h2> &#10145; Title: <%= @myproduct.title %> </h2>
+    <h2> &#10145; Description: <%= @myproduct.description %> </h2>
+    <h2> &#10145; Price: <%= @myproduct.price %> </h2>
+    <h2> &#10145; Capacity: <%= @myproduct.capacity %> </h2>
+    <h2> &#10145; Is_active: <%= @myproduct.is_active %></h2>
+    <h2> &#10145; Status: <%= @myproduct.status %> </h2>
+    <h2> &#10145; Order: <%= @myproduct.orders.count %> </h2>
+  </div>
+
+  <div class="d-flex">
+    <%= button_to "Edit product" , edit_myproduct_path, method: :get ,class:"btn-success border-0 rounded-pill shadow p-2 m-2" %>
+    <%= button_to "Delete product", myproduct_path, method: :delete ,class:"btn-danger border-0 rounded-pill shadow p-2 m-2" %>
+    <%= button_to "View all Products", myproducts_path,method: :get ,class:"btn-primary border-0 rounded-pill shadow p-2 m-2" %>
+  </div>
+  
+</div>

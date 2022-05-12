@@ -1,0 +1,64 @@
+<!-- Product Details Showing -->
+<div class="center flex-column" id="vantajs" style="height:100vh;">
+  <!--Error Message-->
+  <% if flash[:errors] %>
+    <% flash.each do |name,message| %>
+      <p class="text-danger"><%= message%></p>
+    <% end %>
+  <% end %>
+  <div class="d-flex">
+    <div class="m-5" >
+      <div class="card bg-light border-warning shadow">
+        <div class="card-body">
+          <div class="card-header">
+            <h2 class="text-center">Product Details</h2>
+          </div>
+          <div>
+            <h2> &#10145; ID: <%= @rproduct.id %> </h2>
+            <h2> &#10145; Title: <%= @rproduct.title %> </h2>
+            <h2> &#10145; Description: <%= @rproduct.description %> </h2>
+            <h2> &#10145; Price: <%= @rproduct.price %> </h2>
+            <h2> &#10145; Order: <%= @rproduct.rorders.count %> </h2>
+          </div>
+          <div class="d-flex">
+            <%= button_to "Edit product" , edit_rproduct_path, method: :get ,class:"btn-success border-0 rounded-pill shadow p-2 m-2" %>
+            <%= button_to "Delete product", rproducts_path, method: :delete ,class:"btn-danger border-0 rounded-pill shadow p-2 m-2" %>
+            <%= button_to "View all Products", rproducts_path,method: :get ,class:"btn-primary border-0 rounded-pill shadow p-2 m-2" %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% if @rproduct.rorders.any? %>
+      <div class="m-5">
+        <div class="card bg-light border-warning shadow">
+          <div class="card-body">
+            <div class="card-header">
+              <h2 class="text-center">Order Details</h2>
+            </div>
+            <table class="table table-info table-striped">
+              <ol class="fs-2">
+                <thead class="table-secondary">
+                  <td class="text-center"> Product ID </td>
+                  <td class="text-center"> Order ID </td>
+                  <td class="text-center"> Order Quantity </td>
+                  <td class="text-center"> Total Price </td>
+                  <td colspan="2" class="text-center"> Action </td>
+                </thead>
+                <% @rorders_of_rproduct.each do |rorder| %>
+                  <tr>
+                    <td class="text-center"> <%= @rproduct.id %> </td>
+                    <td class="text-center"> <%= rorder.id %> </td>
+                    <td class="text-center"> <%= rorder.quantity %> </td>
+                    <td class="text-center"> <%= rorder.total_price %> </td>
+                    <td class="text-center"><%= button_to "Edit", edit_rproduct_rorder_path(@rproduct, rorder), method: :get ,class:"btn-success border-0 rounded-pill shadow px-3 py-2" %></td>
+                    <td class="text-center"><%= button_to "Delete", rproduct_rorder_path(@rproduct, rorder), method: :delete ,class:"btn-danger border-0 rounded-pill shadow px-3 py-2" %></td>
+                  </tr>
+                <% end %>
+              </ol>
+            </table>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 body {
-  overflow: hidden;
+  /* overflow: hidden; */
   /* Gradient background - 1 */
   /* background-color: #bdd4e7;
 background-image: linear-gradient(315deg, #bdd4e7 0%, #8693ab 74%); */
@@ -7,6 +7,10 @@ background-image: linear-gradient(315deg, #bdd4e7 0%, #8693ab 74%); */
   /* Gradient background - 2 */
   background-color: #f9d29d;
   background-image: linear-gradient(315deg, #f9d29d 0%, #ffd8cb 74%);
+}
+
+.navbar img{
+  width: 17rem;
 }
 
 h1{
@@ -29,4 +33,72 @@ tr td * {
 
 #author_dob_1i, #author_dob_2i, #author_dob_3i, #book_author_id{
   padding: 3px;
+}
+
+#event_event_date, #event_category_id, #enrollment_event_id{
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+#user1_role{
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+}
+
+
+.showcard .card {
+  margin-top: 2em;
+  padding: 1.5em 0.5em 0.5em;
+  border-radius: 2em;
+  text-align: center;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.showcard .card img {
+  width: 65%;
+  border-radius: 15%;
+  margin: 0 auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.showcard .card .card-title {
+  font-weight: 700;
+  font-size: 1.5em;
+}
+
+.showcard .card .btn {
+  border-radius: 2em;
+  background-color: teal;
+  color: #ffffff;
+  padding: 0.5em 1.5em;
+}
+
+.showcard .card .btn:hover {
+  background-color: rgba(0, 128, 128, 0.7);
+  color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.showcard .card .card_btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

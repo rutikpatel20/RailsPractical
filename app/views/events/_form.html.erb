@@ -1,0 +1,32 @@
+<!-- For for New or Edit -->
+<div class="center flex-column" id="vantajs" style="height:100vh;">
+  <% if flash[:errors] %>
+    <% flash[:errors].each do |error| %>
+      <p class="text-danger"><%= error %></p>
+    <% end %>
+  <% end %>
+  <div class="card bg-light border-warning shadow" style="width: 22rem;">
+    <div class="card-body">
+      <div class="card-header">
+        <h2 class="text-center">Event Form</h2>
+      </div>
+      <!-- Form Started Here -->
+      <% if @current_user %>
+        <%= form_for @event do |event| %>
+          <%= event.label :name, "Name :", class: "mt-3" %>
+          <%= event.text_field :name, placeholder: "Enter Event's Name", class: "mb-2 form-control" %>
+          <%= event.label :description, "Description :", class: "mt-3" %>
+          <%= event.text_field :description, step: :any, placeholder: "Enter Event's Description", class: "mb-2 form-control" %>
+          <%= event.label :event_date, "Event Date :", class: "mt-3" %>
+          <%= event.date_field :event_date, as: :date, placeholder: "Enter Event Date", class: "mb-2 rounded-3 " %>
+          <div>
+            <%= event.number_field :user_id, value: @current_user.id, type: :hidden %>
+          </div>
+          <%= event.label :category, "Category :", class: "mt-3" %> <br>
+          <%= event.select :category_id, Category.all.map { |t| [t.category_name, t.id] }, class: "text-danger" %>
+          <%= event.submit class: "btn-primary border-0 rounded-pill shadow p-3 mt-3" %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

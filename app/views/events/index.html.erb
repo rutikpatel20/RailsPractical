@@ -1,0 +1,104 @@
+<%= render 'layouts/navbar' %>
+<div class="center flex-column" id="vantajs" style="height:100vh;">
+  <h1> Events </h1>
+  <!--Error Message-->
+  <% if flash[:errors] %>
+    <% flash.each do |name, message| %>
+      <div class="alert alert-success" role="alert">
+        <%= message %>
+      </div>
+    <% end %>
+  <% end %>
+  <% if @current_user == nil %>
+    <div class="d-flex">
+      <%= link_to "Sign Up", sign_up_path, class: "btn-primary border-0 rounded-pill shadow px-3 py-2 me-2 text-decoration-none" %>
+      <%= link_to "Login", sign_in_path, class: "btn-success border-0 rounded-pill shadow px-3 py-2 me-2 text-decoration-none" %>
+    </div>
+  <% end %>
+  <!-- Event Table Display when user logged in -->
+  <% if @current_user %>
+    <!-- Table for logged in user details -->
+    <div>
+      <table class="table table-danger table-striped">
+        <tr>
+          <td colspan="2" class="text-center">Logged in As</td>
+        </tr>
+        <tr>
+          <td>Username :</td>
+          <td><%= @current_user.username %></td>
+        </tr>
+        <tr>
+          <td>Email :</td>
+          <td><%= @current_user.email %></td>
+        </tr>
+        <tr>
+          <td>User ID :</td>
+          <td><%= @current_user.id %></td>
+        </tr>
+      </table>
+    </div>
+    <div class="d-flex">
+      <%= link_to "Logout", logout_path, data: { 'turbo-method': :delete }, class: "btn-danger border-0 rounded-pill shadow px-3 py-2 me-2 text-decoration-none" %>
+    </div>
+  <% end %>
+  <!-- Search bar for filter with Order Status and Search by Product Name -->
+  <div class="d-flex mt-3">
+    <form class="d-flex mb-3">
+      <%= form_tag events_path, :method => "get" do %>
+        <%= text_field_tag :searchParams, params[:searchParams], placeholder: "Filter For Events", class: "form-control me-2" %>
+        <%= submit_tag "Filter", class: "btn btn-success me-2" %>
+      <% end %>
+      <%= button_to "Clear Filters", events_path, method: :get, class: "btn btn-warning" %>
+    </form>
+  </div>
+  <div>
+    <table class="table table-info table-striped">
+      <ol class="fs-2">
+        <thead class="table-secondary">
+          <td class="text-center"> Id </td>
+          <td class="text-center"> Event Name </td>
+          <td class="text-center"> Description </td>
+          <td class="text-center"> Event Category </td>
+          <td class="text-center"> Created By </td>
+          <td class="text-center"> Event Date </td>
+          <% if @current_user %>
+            <td class="text-center"> Total Comments </td>
+            <td colspan=3 class="text-center"> Action </td>
+          <% end %>
+        </thead>
+        <% @events.each do |event| %>
+          <tr>
+            <td class="text-center"> <%= event.id %> </td>
+            <td class="text-center"> <%= link_to event.name, event_path(event) %> </td>
+            <td class="text-center"> <%= event.description %> </td>
+            <td class="text-center"> <%= event.category.category_name %> </td>
+            <td class="text-center"> <%= event.user.username %> </td>
+            <td class="text-center"> <%= event.event_date %> </td>
+            <% if @current_user %>
+              <td class="text-center"><%= event.comments.count %> </td>
+              <td class="text-center"><%= button_to "Show", event_path(event), method: :get, class: "btn-success border-0 rounded-pill shadow px-3 py-2" %></td>
+              <% if logged_in? %>
+                <% if Enrollment.where("user_id=? and event_id=?", @current_user.id, event.id).blank? %>
+                  <td><%= button_to "Enroll", enroll_event_user_path(id: session[:user_id]), params: { event_id: event.id }, method: "get", class: "btn-warning border-0 rounded-pill shadow px-3 py-2" %></td>
+                <% else %>
+                  <td><%= button_to "Unroll", unenroll_event_user_path(@current_user.id), params: { event_id: event.id }, method: "get", class: "btn-danger border-0 rounded-pill shadow px-3 py-2" %></td>
+                <% end %>
+              <% else %>
+                <td><%= button_to "Edit", edit_event_path(event), method: "get", class: "btn btn-dark" %></td>
+                <td><%= button_to "Remove", event_path(event), params: { event_id: event.id }, method: "delete", class: "btn btn-danger" %></td>
+              <% end %>
+            <% end %>
+          </tr>
+        <% end %>
+      </ol>
+    </table>
+  </div>
+  <% if @current_user %>
+    <div class="d-flex">
+      <%= button_to fa_icon("plus", text: "Add New Event"), new_event_path, method: :get, class: "btn-warning border-0 rounded-pill shadow p-3 m-3" %>
+      <%= button_to fa_icon("tasks", text: "My Profile"), userprofile_users_path, method: :get, class: "btn-success border-0 rounded-pill shadow p-3 m-3" %>
+      <%= button_to fa_icon("user-circle", text: "View Categories"), categories_path, method: :get, class: "btn-success border-0 rounded-pill shadow p-3 m-3" %>
+      <%= link_to fa_icon("plus-square", text: "Enroll_event"), enroll_event_user_path(@current_user.id), method: :get, class: "btn-success border-0 rounded-pill shadow p-3 m-3 text-decoration-none" %>
+    </div>
+  <% end %>
+</div>

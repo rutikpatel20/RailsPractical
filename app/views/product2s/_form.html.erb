@@ -1,0 +1,33 @@
+<!-- Form For Product -->
+<div class="center flex-column" id="vantajs" style="height:100vh;">
+  <div class="card bg-light border-warning shadow" style="width: 22rem;">
+    <div class="card-body">
+      <div class="card-header">
+        <h2 class="text-center">Product Form</h2>
+      </div>
+      <!--Error Message-->
+      <% if flash[:errors] %>
+        <% flash[:errors].each do |error| %>
+          <p class="text-danger"><%= error %></p>
+        <% end %>
+      <% end %>
+      <!-- Form Started Here -->
+      <% if signed_in? %>
+        <%= form_with(model: @product2) do |product| %>
+          <%= product.hidden_field :user1_id, value: current_user1.id, class:"mb-2 form-control" %>
+          <br>
+          <%= product.label :product_name, "Product Name :", class:"mt-3" %>
+          <%= product.text_field :product_name ,placeholder: "Enter Product's Name",class:"mb-2 form-control" %>
+          <br>
+          <%= product.label :price, "Price :" %>
+          <%= product.number_field :price ,placeholder: "Enter Product's Price",class:"mb-2 form-control" %>
+          <br>
+          <%= product.label :description, "Description :" %>
+          <%= product.text_area :description ,placeholder: "Enter Product's Description",class:"mb-2 form-control" %>
+          <br>
+          <%= product.submit class:"btn-primary border-0 rounded-pill shadow p-3" %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

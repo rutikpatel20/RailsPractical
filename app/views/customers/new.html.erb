@@ -1,0 +1,33 @@
+<%= render 'layouts/navbar' %>
+<!-- Add New Product -->
+<div class="center flex-column">
+  <h1>Add New Product</h1>
+  
+  <!--Error Message-->
+  <% if flash[:errors] %>
+    <% flash[:errors].each do |error| %>
+      <p class="text-danger"><%= error %></p>
+    <% end %>
+  <% end %>
+
+  <%# Form Started Here %>
+  <%= form_for @customer do |f| %>
+<%= f.label :fname, "First Name :", class:"mt-3" %>
+    <%= f.text_field :fname ,placeholder: "Enter Customer's Title",class:"mb-2 form-control" %>
+    <br>
+    <%= f.label :lname, "Last Name :", class:"mt-3" %>
+    <%= f.text_field :lname ,placeholder: "Enter Customer's Title",class:"mb-2 form-control" %>
+    <br>
+
+    <%= f.label :email, "email :" %>
+    <%= f.text_field :email ,placeholder: "Enter Customer's email",class:"mb-2 form-control" %>
+    <br>
+
+    <%= f.label :phone_number, "phone_number :" %>
+    <%= f.number_field :phone_number ,placeholder: "Enter Customer's phone_number",class:"mb-2 form-control" %>
+    <br>
+    
+    <%= f.submit class:"btn-primary border-0 rounded-pill shadow p-3" %>
+    
+  <% end %>
+</div>

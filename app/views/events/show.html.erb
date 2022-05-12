@@ -1,0 +1,58 @@
+<!-- Event Details Showing -->
+<div class="center flex-column" id="vantajs" style="height:100vh;">
+  <h1 class="text-light">Event Details</h1>
+  <!--Error Message-->
+  <% if flash[:errors] %>
+    <% flash.each do |name, message| %>
+      <p class="text-danger"><%= message %></p>
+    <% end %>
+  <% end %>
+  <div class="d-flex">
+    <div class="m-5" style="width:50%;">
+      <div class="card border-warning shadow" >
+        <div class="card-body">
+          <div class="card-header">
+            <h2 class="text-center">Event Details</h2>
+          </div>
+          <h2> &#10145; Name: <%= @event.name %> </h2>
+          <h2> &#10145; Description: <%= @event.description %> </h2>
+          <h2> &#10145; Event Date: <%= @event.event_date %> </h2>
+          <h2> &#10145; User ID: <%= @event.user_id %> </h2>
+          <h2> &#10145; Created By: <%= @event.user.username %> </h2>
+          <h2> &#10145; Event Category: <%= @event.category.category_name %> </h2>
+        </div>
+      </div>
+    </div>
+    <div class="m-5">
+      <table class="table table-info table-striped mt-2">
+        <thead>
+          <td>Username </td>
+          <td>Comments </td>
+          <td colspan=2 class="text-center">Likes </td>
+          <td colspan=2 class="text-center">Action </td>
+        </thead>
+        <% @event.comments.each do |comment| %>
+          <tr>
+            <td><%= comment.user.username %> </td>
+            <td><%= comment.user_comment %> </td>
+            <!-- Likes on comment -->
+            <td><%= button_to "LIKE", like_event_comment_path(:event_id => @event.id, :comment_id => comment.id),method: :post, class:"btn btn-info border-0 shadow p-2 m-2" %> </td>
+            <td class="text-success"><%= comment.like %> Likes </td>
+            <% if @current_user.id == comment.user_id %>
+              <td><%= button_to "Edit", edit_comment_path(@event.id, comment), method: :get, class: "btn-success border-0 rounded-pill shadow p-2 m-2" %></td>
+              <td><%= button_to "Delete", destroy_comment_path(@event.id, comment), method: :delete, class: "btn-danger border-0 rounded-pill shadow p-2 m-2" %></td>
+            <% end %>
+          </tr>
+        <% end %>
+      </table>
+      <div class="d-flex">
+        <%= button_to "Add Comment", new_comment_path(@event), method: :get, class: "btn-success border-0 rounded-pill shadow p-2 m-2" %>
+        <% if @current_user.id == @event.user_id %>
+          <%= button_to "Edit event", edit_event_path, method: :get, class: "btn-success border-0 rounded-pill shadow p-2 m-2" %>
+          <%= button_to "Delete event", event_path, method: :delete, class: "btn-danger border-0 rounded-pill shadow p-2 m-2" %>
+        <% end %>
+        <%= button_to "View all Events", events_path, method: :get, class: "btn-primary border-0 rounded-pill shadow p-2 m-2" %>
+      </div>
+    </div>
+  </div>
+</div>

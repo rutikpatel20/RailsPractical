@@ -27,6 +27,12 @@ gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
+# Fontawesome Gem
+gem "font-awesome-rails", "~> 4.7", ">= 4.7.0.8"
+
+# Encryption of passwords is done using bcrypt
+gem "bcrypt", "~> 3.1", ">= 3.1.17"
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
@@ -43,6 +49,13 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 gem "bootsnap", require: false
 
 gem "jquery-rails"
+gem "devise"
+
+# CarrierWave Gem for files uploading
+gem "carrierwave"
+
+# minimagick Gem for image resize
+gem "mini_magick"
 
 # Use Sass to process CSS
 # gem "sassc-rails"
@@ -53,7 +66,11 @@ gem "jquery-rails"
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
-  gem 'pry'
+  gem "pry"
+  
+  # Letteropener gem for viewing mail in the browser
+  gem "letter_opener"
+  gem 'rspec-rails', '~> 6.0.0.rc1'
 end
 
 group :development do

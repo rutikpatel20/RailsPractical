@@ -1,0 +1,49 @@
+<!-- User Details Showing -->
+<div class="center flex-column" id="vantajs">
+  <!--Error Message-->
+  <% if flash[:errors] %>
+    <% flash.each do |name,message| %>
+      <p class="text-danger"><%= message%></p>
+    <% end %>
+  <% end %>
+  <div class="d-flex">
+    <div class="mx-5" >
+      <div class="showcard">
+        <div class="card" style="width: 18rem;">
+          <!-- it will show the uploaded image if it is exist in database -->
+          <%  if @user2.picture? %>
+            <%= image_tag @user2.picture.thumb.url,alt: "Image not available", class:"card-img img-resposive" %>
+          <% end %>
+          <div class="card-body">
+            <h5 class="card-title"><%= @user2.name %></h5>
+            <p class="card-text"><%= @user2.email %></p>
+            <div class="card_btn">
+              <%= button_to "Edit" , edit_user2_path, method: :get ,class:"btn-success border-0 rounded-pill shadow px-3 py-2 m-2" %>
+              <%= button_to "Delete", user2_path(@user2), method: :delete ,class:"btn-danger border-0 rounded-pill shadow px-3 py-2 m-2" %>
+            </div>
+            <%= button_to "View All User", user2s_path, method: :get ,class:"btn-primary border-0 rounded-pill shadow p-2 m-2" %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- it will show the uploaded resume if it is exist in database -->
+    <%  if @user2.resume? %>
+      <div class="m-5">
+        <div class="accordion" id="accordionExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+              <button class="accordion-button collapsed text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                View Resume
+              </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <embed src="<%= @user2.resume %>" width="800px" height="800px"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

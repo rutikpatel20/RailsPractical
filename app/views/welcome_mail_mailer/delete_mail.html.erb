@@ -1,0 +1,21 @@
+<!-- This filed is connected with layouts/update_mail.html.erb -->
+<h3> A <%= @myobject.class.to_s %> has been deleted. </h3>
+<!-- User Details Showing -->
+<div>
+  <div class="d-flex">
+    <div class="mx-5" >
+      <div class="showcard">
+        <div class="card text-dark bg-light" style="width: 20rem; border-radius: 2em;">
+          <div class="card-header text-center mb-3">
+            Deleted User
+          </div>
+          <div class="card-body">
+            <h5 class="card-title text-center", style="font-weight: 700;font-size: 1.5em;"><%= @myobject.name %></h5>
+            <p class="card-text text-center"><%= @myobject.email %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<h4>Mail ended here THANKS!!!</h4>
