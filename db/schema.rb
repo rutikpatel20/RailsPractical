@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_06_103427) do
-
+ActiveRecord::Schema[7.0].define(version: 2022_05_12_062423) do
   create_table "address1s", force: :cascade do |t|
     t.string "house_name"
     t.string "street_name"
@@ -155,6 +154,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_06_103427) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["imageable_type", "imageable_id"], name: "index_images_on_imageable"
+  end
+
+  create_table "js_users", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.string "password"
+    t.boolean "subscription"
+    t.string "subscription_email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "password_confirmation"
   end
 
   create_table "myproducts", force: :cascade do |t|

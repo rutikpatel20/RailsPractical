@@ -1,0 +1,33 @@
+<div class="center flex-column">
+  <h1> Users </h1>
+  <!--Error Message-->
+  <% if flash[:errors] %>
+    <% flash.each do |name,message| %>
+      <p class="text-danger"><%= message %></p>
+    <% end %>
+  <% end %>
+  <p class="text-success"><%= notice %></p>
+  <!-- User Table -->
+  <div>
+    <table class="table table-info table-striped">
+      <ol class="fs-2">
+        <thead class="table-secondary">
+          <td class="text-center"> Name </td>
+          <td class="text-center"> Email </td>
+          <td colspan=3 class="text-center"> Action </td>
+        </thead>
+        <% @js_users.each do |user| %>
+          <tr>
+            <td class="text-center"> <%= link_to user.first_name + " " + user.last_name, js_user_path(user) %> </td>
+            <td class="text-center"> <%= user.email %> </td>
+            <td class="text-center"><%= button_to "Show",js_user_path(user),method: :get, class:"btn-success border-0 rounded-pill shadow px-3 py-2" %></td>
+            <td class="text-center"><%= button_to "Profile",profile_js_user_path(user),method: :get, class:"btn-primary border-0 rounded-pill shadow px-3 py-2" %></td>
+            <td class="text-center"><%= link_to "Delete",js_user_path(user),data: {turbo_method: :delete, turbo_confirm: "Are you want delete?"}, class:"btn-danger border-0 rounded-pill shadow px-3 py-2" %></td>
+          </tr>
+        <% end %>
+      </ol>
+    </table>
+  </div>
+  <div class="d-flex">
+    <%= button_to "Add New User", new_js_user_path, method: :get ,class:"btn-warning border-0 rounded-pill shadow p-3 m-3" %>
+  </div>

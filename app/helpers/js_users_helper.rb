@@ -1,0 +1,2 @@
+module JsUsersHelper
+end
